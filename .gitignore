@@ -6,3 +6,11 @@ __pycache__/
 dist/
 build/
 .env
+
+# Client engagement scripts — local only, never pushed
+scripts/ingest_s3.py
+scripts/ingest_azure.py
+scripts/ingest_gcs.py
+scripts/eda.py
+scripts/pipeline.py
+notebooks/eda_dashboard.py
