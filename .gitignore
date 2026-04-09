@@ -20,9 +20,3 @@ scripts/ingest_gcs.py
 scripts/eda.py
 scripts/pipeline.py
 notebooks/eda_dashboard.py
-
-# Sovereign internal — local only, never pushed
-CLAUDE.md
-MILESTONES.md
-SESSION_STATE.md
-shell.nix
