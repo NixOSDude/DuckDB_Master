@@ -395,6 +395,7 @@
   <div class="nav-logo">🦆 DuckDB Data Master</div>
   <div class="nav-links">
     <a href="#benchmark">Benchmark</a>
+    <a href="#charts">Charts</a>
     <a href="#pipeline">S3 vs NVMe</a>
     <a href="#why">Why DuckDB</a>
     <a href="#sql">The SQL</a>
@@ -833,6 +834,124 @@
     </div>
   </div>
 </section>
+
+<!-- CHARTS -->
+<section id="charts">
+  <div class="section-label">// LIVE DATA — NYC YELLOW CAB 2022–2025</div>
+  <h2>The data. All of it. Interactive.</h2>
+  <p class="section-sub">
+    Queried live from 48 Parquet files by DuckDB. 167,858,646 rows. Four charts.
+    All computed on a single workstation in 971ms.
+  </p>
+
+  <div id="chart-volume" style="width:100%;height:380px;margin-bottom:1.5rem;"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;">
+    <div id="chart-fares" style="height:340px;"></div>
+    <div id="chart-payment" style="height:340px;"></div>
+  </div>
+  <div id="chart-monthly" style="width:100%;height:380px;margin-bottom:1rem;"></div>
+
+  <p style="font-size:0.8rem;color:var(--muted);text-align:center;">
+    Data: NYC TLC Trip Record Data (open dataset) · Engine: DuckDB 1.4.4 · Hardware: Intel Ultra 7 265KF · NVMe
+  </p>
+</section>
+
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+<script>
+const DUCK = '#ffcc00';
+const MUTED = '#8b949e';
+const BG = '#0d1117';
+const SURFACE = '#161b22';
+const GREEN = '#3fb950';
+const BLUE = '#58a6ff';
+const RED = '#f85149';
+
+const layout_base = {
+  paper_bgcolor: SURFACE,
+  plot_bgcolor:  SURFACE,
+  font: { color: '#e6edf3', family: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', size: 12 },
+  margin: { t: 40, r: 20, b: 50, l: 60 },
+  xaxis: { gridcolor: '#30363d', zerolinecolor: '#30363d' },
+  yaxis: { gridcolor: '#30363d', zerolinecolor: '#30363d' },
+  legend: { bgcolor: 'rgba(0,0,0,0)', bordercolor: '#30363d' }
+};
+
+// ── Chart 1: Annual Trip Volume ───────────────────────────────────────────────
+Plotly.newPlot('chart-volume', [{
+  type: 'bar',
+  x: [2022, 2023, 2024, 2025],
+  y: [39.66, 38.31, 41.17, 48.72],
+  text: ['39.7M','38.3M','41.2M','48.7M'],
+  textposition: 'outside',
+  marker: {
+    color: [MUTED, MUTED, MUTED, DUCK],
+    line: { color: DUCK, width: 1 }
+  },
+  hovertemplate: '<b>%{x}</b><br>%{y}M trips<extra></extra>'
+}], Object.assign({}, layout_base, {
+  title: { text: 'Annual Trip Volume — 2022–2025', font: { color: '#e6edf3', size: 14 } },
+  yaxis: Object.assign({}, layout_base.yaxis, { title: 'Trips (millions)' }),
+  xaxis: Object.assign({}, layout_base.xaxis, { tickmode: 'array', tickvals: [2022,2023,2024,2025] })
+}), { responsive: true, displayModeBar: false });
+
+// ── Chart 2: Avg Fare / Tip / Total YoY ──────────────────────────────────────
+Plotly.newPlot('chart-fares', [
+  { x:[2022,2023,2024,2025], y:[15.00,19.90,19.94,20.14], name:'Avg Fare',
+    mode:'lines+markers', line:{color:DUCK,width:2}, marker:{size:7},
+    hovertemplate:'<b>%{x}</b><br>Avg Fare: $%{y}<extra></extra>' },
+  { x:[2022,2023,2024,2025], y:[2.77,3.56,3.37,3.02], name:'Avg Tip',
+    mode:'lines+markers', line:{color:GREEN,width:2}, marker:{size:7},
+    hovertemplate:'<b>%{x}</b><br>Avg Tip: $%{y}<extra></extra>' },
+  { x:[2022,2023,2024,2025], y:[21.90,28.99,28.73,28.91], name:'Avg Total',
+    mode:'lines+markers', line:{color:BLUE,width:2}, marker:{size:7},
+    hovertemplate:'<b>%{x}</b><br>Avg Total: $%{y}<extra></extra>' }
+], Object.assign({}, layout_base, {
+  title: { text: 'Avg Fare · Tip · Total — Year over Year', font:{ color:'#e6edf3', size:14 } },
+  yaxis: Object.assign({}, layout_base.yaxis, { title: 'USD' }),
+  xaxis: Object.assign({}, layout_base.xaxis, { tickmode:'array', tickvals:[2022,2023,2024,2025] })
+}), { responsive: true, displayModeBar: false });
+
+// ── Chart 3: Payment Type Shift ───────────────────────────────────────────────
+Plotly.newPlot('chart-payment', [
+  { x:[2022,2023,2024,2025], y:[75.9,77.9,74.0,63.7], name:'Credit Card',
+    type:'bar', marker:{color:DUCK},
+    hovertemplate:'<b>%{x}</b><br>Credit: %{y}%<extra></extra>' },
+  { x:[2022,2023,2024,2025], y:[19.6,16.7,13.5,9.6], name:'Cash',
+    type:'bar', marker:{color:MUTED},
+    hovertemplate:'<b>%{x}</b><br>Cash: %{y}%<extra></extra>' },
+  { x:[2022,2023,2024,2025], y:[0.5,0.6,0.7,0.6], name:'No Charge',
+    type:'bar', marker:{color:GREEN},
+    hovertemplate:'<b>%{x}</b><br>No Charge: %{y}%<extra></extra>' },
+  { x:[2022,2023,2024,2025], y:[0.6,1.3,1.9,2.2], name:'Dispute',
+    type:'bar', marker:{color:RED},
+    hovertemplate:'<b>%{x}</b><br>Dispute: %{y}%<extra></extra>' }
+], Object.assign({}, layout_base, {
+  barmode: 'stack',
+  title: { text: 'Payment Type Shift 2022→2025', font:{ color:'#e6edf3', size:14 } },
+  yaxis: Object.assign({}, layout_base.yaxis, { title:'% of Trips' }),
+  xaxis: Object.assign({}, layout_base.xaxis, { tickmode:'array', tickvals:[2022,2023,2024,2025] })
+}), { responsive: true, displayModeBar: false });
+
+// ── Chart 4: Monthly Volume 4-Year ────────────────────────────────────────────
+const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+Plotly.newPlot('chart-monthly', [
+  { x:months, y:[2463959,2979420,3627888,3599903,3588292,3557692,3174363,3152695,3183784,3675812,3252670,3399620],
+    name:'2022', mode:'lines+markers', line:{color:MUTED,width:2}, marker:{size:5},
+    hovertemplate:'<b>2022 %{x}</b><br>%{y:,} trips<extra></extra>' },
+  { x:months, y:[3066759,2914003,3403660,3288248,3513664,3307259,2907093,2824201,2846741,3522280,3339732,3376586],
+    name:'2023', mode:'lines+markers', line:{color:BLUE,width:2}, marker:{size:5},
+    hovertemplate:'<b>2023 %{x}</b><br>%{y:,} trips<extra></extra>' },
+  { x:months, y:[2964637,3007534,3582613,3514295,3723843,3539172,3076876,2979192,3633025,3833780,3646372,3668381],
+    name:'2024', mode:'lines+markers', line:{color:GREEN,width:2}, marker:{size:5},
+    hovertemplate:'<b>2024 %{x}</b><br>%{y:,} trips<extra></extra>' },
+  { x:months, y:[3475240,3577542,4145229,3970568,4591844,4322949,3898971,3574080,4251019,4428708,4181432,4305020],
+    name:'2025', mode:'lines+markers', line:{color:DUCK,width:2.5}, marker:{size:6},
+    hovertemplate:'<b>2025 %{x}</b><br>%{y:,} trips<extra></extra>' }
+], Object.assign({}, layout_base, {
+  title: { text: 'Monthly Trip Volume — 4-Year Comparison (2025 is the breakout year)', font:{ color:'#e6edf3', size:14 } },
+  yaxis: Object.assign({}, layout_base.yaxis, { title:'Trips' })
+}), { responsive: true, displayModeBar: false });
+</script>
 
 <!-- CONTACT -->
 <section id="contact">
