@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DuckDB Data Master — Scott Baker</title>
+  <meta name="description" content="Data engineering consulting powered by DuckDB. 171M rows/sec on a single node. No Spark. No Databricks bill. Databricks + AWS certified." />
+  <style>
+    :root {
+      --bg:      #0d1117;
+      --surface: #161b22;
+      --border:  #30363d;
+      --text:    #e6edf3;
+      --muted:   #8b949e;
+      --yellow:  #f5c518;
+      --duck:    #ffcc00;
+      --green:   #3fb950;
+      --blue:    #58a6ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--duck); letter-spacing: -0.5px; }
+    .nav-links { display: flex; gap: 1.8rem; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── SECTIONS ── */
+    section { max-width: 960px; margin: 0 auto; padding: 4rem 2rem; }
+    .section-label { color: var(--duck); font-size: 0.78rem; font-weight: 700;
+                     letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
+    h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.2; }
+    .section-sub { color: var(--muted); font-size: 1.05rem; margin-bottom: 2.5rem; max-width: 620px; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+    }
+    .hero-badge {
+      display: inline-block;
+      background: #211c00;
+      border: 1px solid var(--duck);
+      color: var(--duck);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 0.3rem 0.8rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+    #hero h1 {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.2rem;
+    }
+    #hero h1 span { color: var(--duck); }
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 580px;
+      margin-bottom: 2rem;
+    }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--duck);
+      color: #000;
+      font-weight: 700;
+      padding: 0.75rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .btn-secondary {
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.75rem 1.6rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .btn-secondary:hover { border-color: var(--duck); }
+
+    /* ── BENCHMARK RESULT ── */
+    .bench-box {
+      background: var(--surface);
+      border: 1px solid var(--duck);
+      border-radius: 10px;
+      padding: 2rem;
+      margin: 2.5rem 0;
+    }
+    .bench-number {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      color: var(--duck);
+      line-height: 1;
+    }
+    .bench-label { color: var(--muted); font-size: 0.9rem; margin-top: 0.3rem; }
+    .bench-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px,1fr)); gap: 1.5rem; }
+    .bench-stat { text-align: center; }
+    .bench-stat .val { font-size: 1.5rem; font-weight: 700; color: var(--text); }
+    .bench-stat .lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+    /* ── CERTS ── */
+    .cert-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .cert-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .cert-badge .cert-icon { font-size: 1.5rem; }
+    .cert-badge .cert-name { font-weight: 700; font-size: 0.9rem; }
+    .cert-badge .cert-issuer { font-size: 0.78rem; color: var(--muted); }
+
+    /* ── COMPARISON TABLE ── */
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+    .compare-table th {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.7rem 1rem;
+      text-align: left;
+    }
+    .compare-table td {
+      border: 1px solid var(--border);
+      padding: 0.7rem 1rem;
+    }
+    .compare-table tr:nth-child(even) td { background: #0d1117; }
+    .good { color: var(--green); font-weight: 700; }
+    .bad  { color: #f85149; }
+
+    /* ── SQL CODE ── */
+    .code-block {
+      background: #010409;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem 1.4rem;
+      font-family: "JetBrains Mono", "Fira Code", monospace;
+      font-size: 0.82rem;
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .kw  { color: #ff7b72; }
+    .fn  { color: #79c0ff; }
+    .cm  { color: var(--muted); font-style: italic; }
+    .num { color: #f0883e; }
+
+    /* ── SERVICES ── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap: 1.2rem;
+    }
+    .service-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .service-card:hover { border-color: var(--duck); }
+    .service-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .service-card p { font-size: 0.88rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    .contact-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2.5rem;
+      text-align: center;
+    }
+    .contact-box h2 { margin-bottom: 0.6rem; }
+    .contact-box p { color: var(--muted); margin-bottom: 1.5rem; }
+    .contact-email {
+      display: inline-block;
+      color: var(--duck);
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1px solid var(--duck);
+      padding: 0.7rem 1.8rem;
+      border-radius: 6px;
+    }
+    .contact-email:hover { background: var(--duck); color: #000; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 2rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">🦆 DuckDB Data Master</div>
+  <div class="nav-links">
+    <a href="#benchmark">Benchmark</a>
+    <a href="#why">Why DuckDB</a>
+    <a href="#sql">The SQL</a>
+    <a href="#services">Services</a>
+    <a href="#contact">Contact</a>
+    <a href="https://github.com/NixOSDude/DuckDB_Master" target="_blank">GitHub</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div id="hero">
+  <div class="hero-badge">DATABRICKS CERTIFIED · AWS SOLUTIONS ARCHITECT</div>
+  <h1>Single-node analytics.<br /><span>No Spark. No cluster bill.</span></h1>
+  <p class="hero-sub">
+    171 million rows per second on one machine using DuckDB and plain SQL.
+    I help companies cut their Databricks spend by 80–95% without sacrificing query power.
+  </p>
+  <div class="hero-cta">
+    <a href="#contact" class="btn-primary">Get in Touch</a>
+    <a href="#benchmark" class="btn-secondary">See the Benchmark →</a>
+  </div>
+</div>
+
+<!-- BENCHMARK -->
+<section id="benchmark">
+  <div class="section-label">// THE NUMBERS</div>
+  <h2>171M rows/sec. One node. Real data.</h2>
+  <p class="section-sub">
+    5 analytical queries across 4 years of NYC Yellow Cab data — 48 Parquet files,
+    ~685 million rows. No cluster. No JVM. No Spark executor overhead.
+  </p>
+
+  <div class="bench-box">
+    <div style="text-align:center; margin-bottom:1.5rem;">
+      <div class="bench-number">171,000,000</div>
+      <div class="bench-label">rows / second · Intel Ultra 7 265KF · NVMe · DuckDB 1.4.4</div>
+    </div>
+    <div class="bench-grid">
+      <div class="bench-stat">
+        <div class="val">~685M</div>
+        <div class="lbl">Total rows scanned</div>
+      </div>
+      <div class="bench-stat">
+        <div class="val">48</div>
+        <div class="lbl">Parquet files (4 years)</div>
+      </div>
+      <div class="bench-stat">
+        <div class="val">5</div>
+        <div class="lbl">Analytical queries</div>
+      </div>
+      <div class="bench-stat">
+        <div class="val">~4s</div>
+        <div class="lbl">Total wall time</div>
+      </div>
+      <div class="bench-stat">
+        <div class="val">$0</div>
+        <div class="lbl">Cluster cost</div>
+      </div>
+      <div class="bench-stat">
+        <div class="val">1</div>
+        <div class="lbl">Machine needed</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cert-row" style="margin-top:2rem;">
+    <div class="cert-badge">
+      <div class="cert-icon">🏆</div>
+      <div>
+        <div class="cert-name">Databricks Certified</div>
+        <div class="cert-issuer">Data Engineer Associate · Scala</div>
+      </div>
+    </div>
+    <div class="cert-badge">
+      <div class="cert-icon">☁️</div>
+      <div>
+        <div class="cert-name">AWS Solutions Architect</div>
+        <div class="cert-issuer">Associate — Amazon Web Services</div>
+      </div>
+    </div>
+    <div class="cert-badge">
+      <div class="cert-icon">🦆</div>
+      <div>
+        <div class="cert-name">DuckDB Specialist</div>
+        <div class="cert-issuer">Columnar · Parquet · Single-node analytics</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY DUCKDB -->
+<section id="why">
+  <div class="section-label">// WHY IT MATTERS</div>
+  <h2>Your Databricks bill is optional.</h2>
+  <p class="section-sub">
+    Most analytics workloads at mid-market companies fit on a single modern server.
+    DuckDB processes columnar Parquet data in-process — no serialization, no cluster coordination, no $15k/month bill.
+  </p>
+
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Capability</th>
+        <th>Databricks / Spark</th>
+        <th>DuckDB (single node)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>685M row scan + 5 queries</td>
+        <td class="bad">~$8–40 cluster cost</td>
+        <td class="good">$0 — local process</td>
+      </tr>
+      <tr>
+        <td>Infrastructure to start</td>
+        <td class="bad">Cluster, driver, executors, YARN/K8s</td>
+        <td class="good">One binary, one machine</td>
+      </tr>
+      <tr>
+        <td>Monthly platform cost</td>
+        <td class="bad">$3,000–$25,000+</td>
+        <td class="good">$20–200 (VPS or laptop)</td>
+      </tr>
+      <tr>
+        <td>Time to first query</td>
+        <td class="bad">5–15 min (cluster startup)</td>
+        <td class="good">&lt; 1 second</td>
+      </tr>
+      <tr>
+        <td>Parquet read performance</td>
+        <td>Fast (distributed)</td>
+        <td class="good">Fast (columnar, vectorized, in-process)</td>
+      </tr>
+      <tr>
+        <td>SQL compatibility</td>
+        <td>SparkSQL (HiveQL dialect)</td>
+        <td class="good">Standard SQL + PIVOT, ASOF JOIN, LIST agg</td>
+      </tr>
+      <tr>
+        <td>Operational complexity</td>
+        <td class="bad">High — cluster mgmt, DBUs, autoscale</td>
+        <td class="good">Zero — embed in any Python/CLI script</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SQL -->
+<section id="sql">
+  <div class="section-label">// THE CODE WE ACTUALLY RAN</div>
+  <h2>Plain SQL. Verifiable results.</h2>
+  <p class="section-sub">
+    Five queries. Real data from the NYC TLC open dataset.
+    No proprietary runtime. Run it yourself.
+  </p>
+
+  <div style="margin-bottom:1.2rem;">
+    <strong style="color:var(--muted);font-size:0.85rem;">Q1 — Total trip volume, 4 years</strong>
+  </div>
+  <div class="code-block"><span class="kw">SELECT</span> year, <span class="fn">COUNT</span>(*) <span class="kw">AS</span> total_trips,
+       <span class="fn">ROUND</span>(<span class="fn">COUNT</span>(*) / <span class="num">1e6</span>, <span class="num">2</span>) <span class="kw">AS</span> millions
+<span class="kw">FROM</span> (
+  <span class="kw">SELECT</span> <span class="num">2022</span> <span class="kw">AS</span> year <span class="kw">FROM</span> <span class="fn">read_parquet</span>(<span class="str">'yellow/2022/*.parquet'</span>)
+  <span class="kw">UNION ALL SELECT</span> <span class="num">2023</span> <span class="kw">FROM</span> <span class="fn">read_parquet</span>(<span class="str">'yellow/2023/*.parquet'</span>)
+  <span class="kw">UNION ALL SELECT</span> <span class="num">2024</span> <span class="kw">FROM</span> <span class="fn">read_parquet</span>(<span class="str">'yellow/2024/*.parquet'</span>)
+  <span class="kw">UNION ALL SELECT</span> <span class="num">2025</span> <span class="kw">FROM</span> <span class="fn">read_parquet</span>(<span class="str">'yellow/2025/*.parquet'</span>)
+)
+<span class="kw">GROUP BY</span> year <span class="kw">ORDER BY</span> year;</div>
+
+  <div style="margin:1.5rem 0 1.2rem;">
+    <strong style="color:var(--muted);font-size:0.85rem;">Q3 — Monthly trend pivot (DuckDB-native PIVOT)</strong>
+  </div>
+  <div class="code-block"><span class="kw">PIVOT</span> (
+  <span class="kw">SELECT</span> year, <span class="fn">MONTH</span>(tpep_pickup_datetime) <span class="kw">AS</span> month,
+         <span class="fn">COUNT</span>(*) <span class="kw">AS</span> trips
+  <span class="kw">FROM</span> all_years
+  <span class="kw">GROUP BY</span> year, month
+) <span class="kw">ON</span> year <span class="kw">USING</span> <span class="fn">SUM</span>(trips) <span class="kw">GROUP BY</span> month <span class="kw">ORDER BY</span> month;
+<span class="cm">-- Native PIVOT syntax — no Spark workarounds, no SparkSQL conditionals</span></div>
+
+  <p style="margin-top:1.2rem;font-size:0.88rem;color:var(--muted);">
+    Full script: <a href="https://github.com/NixOSDude/DuckDB_Master/blob/main/scripts/benchmark_nyc_4year.sh" style="color:var(--blue);">scripts/benchmark_nyc_4year.sh</a>
+  </p>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">// WHAT I DO</div>
+  <h2>Data engineering that ships.</h2>
+  <p class="section-sub">Remote consulting. Fixed-scope engagements. Results you can verify.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>🔍 Databricks Cost Audit</h3>
+      <p>I review your current Databricks/Spark usage, identify workloads that can move to DuckDB or single-node pipelines, and deliver a written cost-reduction plan within 48 hours.</p>
+    </div>
+    <div class="service-card">
+      <h3>🦆 DuckDB Pipeline Build</h3>
+      <p>End-to-end columnar pipeline — Parquet ingestion, transformation, analytical queries, scheduled runs. Delivered as reproducible scripts you own and understand.</p>
+    </div>
+    <div class="service-card">
+      <h3>📊 Analytics Dashboard</h3>
+      <p>Streamlit dashboard backed by DuckDB. Fast, interactive, zero cloud dependency. Deployed on a $20/month VPS or embedded in your existing infrastructure.</p>
+    </div>
+    <div class="service-card">
+      <h3>☁️ AWS Data Architecture</h3>
+      <p>S3 + Glue + Athena + DuckDB hybrid architectures. Leveraging AWS Solutions Architect experience to design data lakes that scale without surprise bills.</p>
+    </div>
+    <div class="service-card">
+      <h3>🏗️ Migration from Spark</h3>
+      <p>Migrate Spark jobs to DuckDB or Databricks SQL. Port SparkSQL to standard SQL. Cut cluster dependency for batch workloads that don't need distributed compute.</p>
+    </div>
+    <div class="service-card">
+      <h3>📐 Data Engineering Review</h3>
+      <p>Async code and architecture review of your current data pipelines. Written recommendations with specific, actionable improvements. Delivered in 48 hours.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-box">
+    <div class="section-label" style="text-align:center;">// LET'S TALK</div>
+    <h2>Ready to cut your data costs?</h2>
+    <p>All engagements start with a free 30-minute scoping call.<br />
+       I respond to all serious inquiries within 24 hours.</p>
+    <a href="mailto:scott.bakerphx@gmail.com" class="contact-email">
+      scott.bakerphx@gmail.com
+    </a>
+    <p style="margin-top:1.2rem;font-size:0.85rem;color:var(--muted);">
+      GitHub: <a href="https://github.com/NixOSDude/DuckDB_Master" style="color:var(--blue);">NixOSDude/DuckDB_Master</a>
+    </p>
+  </div>
+</section>
+
+<footer>
+  © 2026 Scott Baker · duckdatamaster.guru ·
+  <a href="https://github.com/NixOSDude/DuckDB_Master" style="color:var(--muted);">GitHub</a>
+</footer>
+
+</body>
+</html>
