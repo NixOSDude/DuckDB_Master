@@ -7,6 +7,12 @@ dist/
 build/
 .env
 
+# Scala pipeline — local only, never pushed
+scala/target/
+scala/.bsp/
+scala/.metals/
+scala/.idea/
+
 # Client engagement scripts — local only, never pushed
 scripts/ingest_s3.py
 scripts/ingest_azure.py
@@ -14,3 +20,9 @@ scripts/ingest_gcs.py
 scripts/eda.py
 scripts/pipeline.py
 notebooks/eda_dashboard.py
+
+# Sovereign internal — local only, never pushed
+CLAUDE.md
+MILESTONES.md
+SESSION_STATE.md
+shell.nix
