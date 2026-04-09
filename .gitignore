@@ -22,3 +22,8 @@ notebooks/
 
 # Nix shell — local only
 shell.nix
+
+# Sovereign internal — local only
+CLAUDE.md
+MILESTONES.md
+SESSION_STATE.md
