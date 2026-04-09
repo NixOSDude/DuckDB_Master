@@ -1,45 +1,72 @@
-# DuckDB Data Master
+# Scott Baker — Data Engineer & DuckDB Specialist
 
-**171M rows/sec. Single node. No Spark. No cluster bill.**
+**172,871,932 rows/sec. 167M rows. 971ms. One machine. No cluster.**
 
-Data engineering consulting by Scott Baker — Databricks Certified, AWS Solutions Architect.
+---
 
-## What's in this repo
+## About
+
+I am a data engineer specializing in high-performance columnar analytics — replacing overpriced
+Spark clusters and Databricks bills with single-node DuckDB pipelines that are faster, cheaper,
+and operationally simpler.
+
+I have over a decade of experience spanning enterprise security, cloud infrastructure, and data
+engineering across AWS, Azure, and GCP. I benchmark production workloads, architect cloud-native
+data pipelines, and deliver results you can verify.
+
+**Certifications:**
+- Databricks Certified Associate Developer for Apache Spark (Scala)
+- AWS Certified Solutions Architect — Associate
+
+---
+
+## Verified Benchmark — April 2026
 
 ```
-scripts/
-  benchmark_nyc_4year.sh   # 5 DuckDB queries across 685M rows — the benchmark
-  download_nyc_taxi.sh     # Download NYC TLC Parquet data (2022–2025)
+Dataset : NYC Yellow Cab 2022–2025 · 48 Parquet files · 2.4 GB compressed
+Rows    : 167,858,646
+Queries : 5 analytical queries (COUNT, GROUP BY, PIVOT, window aggregates)
+Time    : 971ms total wall time · cold NVMe · no warmup
+Speed   : 172,871,932 rows/sec
+vs Spark: 25× faster than Apache Spark (50 GB heap, pre-warmed, identical hardware)
+Cost    : $0 cluster · 1 machine · 1 process
+```
 
-notebooks/
-  nyc_taxi_viz.py          # Streamlit dashboard — live charts from DuckDB
+| Query | Description | Time |
+|-------|-------------|------|
+| Q1 | Row count per year — 4 years | 29ms |
+| Q2 | Avg fare, distance, tip, total, passengers YoY — 143M filtered rows | 401ms |
+| Q3 | Monthly trip volume pivot — 48 cells, native DuckDB PIVOT | 312ms |
+| Q4 | Payment type shift 2022→2025 — cash collapse 19.6% → 9.6% | 158ms |
+| Q5 | CBD congestion fee — 2025-only column, 72.8% of trips, $25.03M captured | 64ms |
 
+Hardware: Intel Ultra 7 265KF (20-core) · NVMe SSD · 64GB RAM · Arch Linux · DuckDB 1.4.4
+
+---
+
+## What's in This Repo
+
+```
 docs/
-  index.html               # Website → duckdatamaster.guru (GitHub Pages)
+  index.html   — duckdatamaster.guru (GitHub Pages)
+  resume.html  — Full resume
 ```
 
-## Run the benchmark
+---
 
-```bash
-# 1. Install DuckDB (https://duckdb.org/docs/installation)
+## Services
 
-# 2. Download the data (~12GB for yellow cab 2022–2025)
-bash scripts/download_nyc_taxi.sh --type=yellow --year=2022
-bash scripts/download_nyc_taxi.sh --type=yellow --year=2023
-bash scripts/download_nyc_taxi.sh --type=yellow --year=2024
-bash scripts/download_nyc_taxi.sh --type=yellow --year=2025
+- DuckDB pipeline builds — S3, Azure Blob, GCP Storage
+- Databricks cost audits — identify what can move off the cluster today
+- Bare-metal / NVMe architecture — stop paying S3 I/O tax on hot analytical workloads
+- Streamlit dashboards — live analytics backed by DuckDB, zero cluster dependency
+- Spark migration — port SparkSQL jobs to standard DuckDB SQL
+- Post-quantum secured pipelines — ML-DSA-65 signing + ML-KEM key exchange
+- AWS / Azure / GCP data architecture
+- Architecture reviews — written recommendations delivered in 48 hours
 
-# 3. Run the benchmark
-bash scripts/benchmark_nyc_4year.sh
-```
-
-## Run the Streamlit dashboard
-
-```bash
-pip install streamlit duckdb pandas plotly
-streamlit run notebooks/nyc_taxi_viz.py
-```
+---
 
 ## Contact
 
-**scott.bakerphx@gmail.com** · [duckdatamaster.guru](https://duckdatamaster.guru)
+**scott@duckdatamaster.guru** · [duckdatamaster.guru](https://duckdatamaster.guru)

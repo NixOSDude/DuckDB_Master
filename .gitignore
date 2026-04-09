@@ -7,16 +7,18 @@ dist/
 build/
 .env
 
-# Scala pipeline — local only, never pushed
+# Scala pipeline — local only
+scala/
 scala/target/
 scala/.bsp/
 scala/.metals/
 scala/.idea/
 
-# Client engagement scripts — local only, never pushed
-scripts/ingest_s3.py
-scripts/ingest_azure.py
-scripts/ingest_gcs.py
-scripts/eda.py
-scripts/pipeline.py
-notebooks/eda_dashboard.py
+# All scripts — local only
+scripts/
+
+# All notebooks — local only
+notebooks/
+
+# Nix shell — local only
+shell.nix
