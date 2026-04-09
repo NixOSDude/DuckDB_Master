@@ -603,6 +603,27 @@
   </div>
 </section>
 
+<!-- CHARTS -->
+<section id="charts">
+  <div class="section-label">// LIVE DATA — NYC YELLOW CAB 2022–2025</div>
+  <h2>The data. All of it. Interactive.</h2>
+  <p class="section-sub">
+    Queried live from 48 Parquet files by DuckDB. 167,858,646 rows. Four charts.
+    All computed on a single workstation in 971ms.
+  </p>
+
+  <div id="chart-volume" style="width:100%;height:380px;margin-bottom:1.5rem;"></div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;">
+    <div id="chart-fares" style="height:340px;"></div>
+    <div id="chart-payment" style="height:340px;"></div>
+  </div>
+  <div id="chart-monthly" style="width:100%;height:380px;margin-bottom:1rem;"></div>
+
+  <p style="font-size:0.8rem;color:var(--muted);text-align:center;">
+    Data: NYC TLC Trip Record Data (open dataset) · Engine: DuckDB 1.4.4 · Hardware: Intel Ultra 7 265KF · NVMe
+  </p>
+</section>
+
 <!-- PIPELINE -->
 <section id="pipeline">
   <div class="section-label">// HOW IT WORKS</div>
@@ -820,31 +841,18 @@
       <p>Audit your S3 data lake for workloads that belong on NVMe. Design the hot/cold split — NVMe for compute, object storage for archival. Get DuckDB throughput you can actually feel.</p>
     </div>
     <div class="service-card" style="border-color:#a371f7;">
-      <h3 style="color:#a371f7;">🔐 Post-Quantum Secured Pipelines</h3>
-      <p>Data pipelines secured with NIST-standard post-quantum cryptography — ML-DSA-65 signing and ML-KEM key exchange. Tamper-evident audit logs. Designed for healthcare, finance, and government workloads that need to prove chain-of-custody today and remain secure against quantum threats tomorrow.</p>
+      <h3 style="color:#a371f7;">🔐 Post-Quantum Secured Deliverables</h3>
+      <p>Every file I deliver — Parquet, CSV, report — is signed with <strong style="color:var(--text);">ML-DSA-65 (NIST FIPS 204)</strong>, the post-quantum digital signature standard. You get the data file, a detached <code>.sig</code> file, and a one-command verifier. Run it against my public key and know the file is authentic and untampered.</p>
+      <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--muted);">
+        Designed for healthcare, finance, and government workloads that need provable chain-of-custody today and quantum resistance tomorrow.
+      </p>
+      <p style="margin-top:0.9rem;">
+        <a href="duckpqc.pub" download style="color:#a371f7;font-weight:600;text-decoration:none;border:1px solid #a371f7;padding:0.3rem 0.75rem;border-radius:4px;font-size:0.85rem;">
+          ↓ Download duckpqc.pub — Scott Baker's ML-DSA-65 public key
+        </a>
+      </p>
     </div>
   </div>
-</section>
-
-<!-- CHARTS -->
-<section id="charts">
-  <div class="section-label">// LIVE DATA — NYC YELLOW CAB 2022–2025</div>
-  <h2>The data. All of it. Interactive.</h2>
-  <p class="section-sub">
-    Queried live from 48 Parquet files by DuckDB. 167,858,646 rows. Four charts.
-    All computed on a single workstation in 971ms.
-  </p>
-
-  <div id="chart-volume" style="width:100%;height:380px;margin-bottom:1.5rem;"></div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;">
-    <div id="chart-fares" style="height:340px;"></div>
-    <div id="chart-payment" style="height:340px;"></div>
-  </div>
-  <div id="chart-monthly" style="width:100%;height:380px;margin-bottom:1rem;"></div>
-
-  <p style="font-size:0.8rem;color:var(--muted);text-align:center;">
-    Data: NYC TLC Trip Record Data (open dataset) · Engine: DuckDB 1.4.4 · Hardware: Intel Ultra 7 265KF · NVMe
-  </p>
 </section>
 
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>

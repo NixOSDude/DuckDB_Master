@@ -23,6 +23,12 @@ notebooks/
 # Nix shell — local only
 shell.nix
 
+# PQC signing suite — local only (binaries + keys)
+pqc/pqc_keygen
+pqc/pqc_sign
+pqc/pqc_verify
+pqc/duckpqc.pub
+
 # Sovereign internal — local only
 CLAUDE.md
 MILESTONES.md
