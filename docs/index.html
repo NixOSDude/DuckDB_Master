@@ -520,11 +520,10 @@
     </div>
   </div>
 
-  <div class="section-label" style="margin-top:1.8rem;">// Hardware-Derived Projections · Cloud</div>
+  <div class="section-label" style="margin-top:1.8rem;">// How It Scales</div>
   <p style="font-size:0.88rem;color:var(--muted);margin-bottom:0.8rem;line-height:1.6;">
-    Estimates derived from published hardware specifications — not yet measured on cloud instances.
-    DuckDB is CPU + NVMe bound. It does not use the GPU. Throughput scales with core count,
-    memory bandwidth, AVX-512 support, and local NVMe speed.
+    DuckDB is CPU + NVMe bound. The workstation number is measured and verified.
+    Bare-metal and cloud NVMe figures are informed estimates based on published hardware specs — not yet run.
   </p>
   <table class="proj-table">
     <thead>
@@ -537,9 +536,9 @@
     </thead>
     <tbody>
       <tr>
-        <td>Workstation (measured)</td>
+        <td>Workstation (measured ✓)</td>
         <td style="color:var(--muted);">Intel Ultra 7 265KF · NVMe · 64GB RAM</td>
-        <td class="measured">172M rows/sec · 971ms ✓</td>
+        <td class="measured">172M rows/sec · 971ms</td>
         <td style="color:var(--muted);">$0 (owned)</td>
       </tr>
       <tr>
@@ -555,25 +554,17 @@
         <td style="color:var(--muted);">~$900/mo on-demand</td>
       </tr>
       <tr>
-        <td>GCP c3d-highcpu-88 + Local SSD</td>
-        <td style="color:var(--muted);">AMD EPYC 9B14 · 88 vCPU · Local SSD ~6 GB/s</td>
-        <td class="est">~400–500M rows/sec (est.)</td>
-        <td style="color:var(--muted);">~$2,200/mo on-demand</td>
-      </tr>
-      <tr>
-        <td>Databricks (same GCP)</td>
-        <td style="color:var(--muted);">Spark cluster · JVM heap · DBU licensing</td>
-        <td style="color:#f85149;font-weight:700;">~20–40M rows/sec (typical)</td>
+        <td>Databricks cluster</td>
+        <td style="color:var(--muted);">Spark · JVM heap · DBU licensing · S3</td>
+        <td style="color:#f85149;font-weight:700;">~6–40M rows/sec (measured Spark baseline: 6.88M)</td>
         <td style="color:#f85149;font-weight:700;">$5,000–$25,000/mo</td>
       </tr>
     </tbody>
   </table>
   <p class="proj-note">
-    Projection basis: local NVMe ~1.7× faster than workstation on i4i (6 GB/s vs 3.5 GB/s).
-    GCP c3d local SSD + AMD EPYC AVX-512 + 88 cores → estimated 2.5–3× gain.
-    Hetzner gains from higher core count + faster memory bandwidth on Ryzen 9000.
-    All cloud figures are conservative estimates — GCP benchmark verification pending.
-    Databricks estimate based on published Spark benchmarks on comparable hardware.
+    Workstation result is verified — measured 2026-04-08 on local NVMe, cold reads, no warmup.
+    Hetzner and AWS i4i estimates based on published NVMe throughput specs vs measured workstation baseline.
+    Spark baseline of 6.88M rows/sec measured on identical workstation hardware, 50GB heap pre-warmed.
   </p>
 
   <div class="cert-row" style="margin-top:1.5rem;">
