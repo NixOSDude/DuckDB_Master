@@ -15,8 +15,8 @@ engineering across AWS, Azure, and GCP. I benchmark production workloads, archit
 data pipelines, and deliver results you can verify.
 
 **Certifications:**
-- Databricks Certified Associate Developer for Apache Spark (Scala)
-- AWS Certified Solutions Architect — Associate
+- [Databricks Certified Associate Developer for Apache Spark (Scala)](https://credentials.databricks.com/embed/96e65e17-56d5-4682-a8f4-c9e77b2a7251)
+- [AWS Certified Solutions Architect — Associate](https://www.credly.com/badges/0957ca40-e7ba-4984-99b8-444E8DE58A18/public_url)
 
 ---
 
