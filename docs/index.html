@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DuckDB Data Master — Scott Baker</title>
-  <meta name="description" content="Data engineering consulting powered by DuckDB. 171M rows/sec on a single node. AWS, Azure, GCP. No Spark. No Databricks bill. Databricks + AWS certified." />
+  <meta name="description" content="Data engineering consulting powered by DuckDB. 172M rows/sec on a single node. AWS, Azure, GCP. No Spark. No Databricks bill. Databricks + AWS certified." />
   <style>
     :root {
       --bg:      #0d1117;
@@ -265,7 +265,7 @@
   <div class="nav-logo">🦆 DuckDB Data Master</div>
   <div class="nav-links">
     <a href="#benchmark">Benchmark</a>
-    <a href="#pipeline">Pipeline</a>
+    <a href="#pipeline">S3 vs NVMe</a>
     <a href="#why">Why DuckDB</a>
     <a href="#sql">The SQL</a>
     <a href="#services">Services</a>
@@ -280,7 +280,7 @@
   <div class="hero-badge">DATABRICKS CERTIFIED · AWS SOLUTIONS ARCHITECT ASSOCIATE · AZURE · GCP</div>
   <h1>Single-node analytics.<br /><span>No Spark. No cluster bill.</span></h1>
   <p class="hero-sub">
-    171 million rows per second on one machine using DuckDB and plain SQL.
+    172 million rows per second. 5 queries. 167M rows. Under 1 second — on a single machine.
     I connect directly to your S3, Azure Blob, or GCP bucket and deliver results —
     no cluster, no vendor lock-in, no $15k/month bill.
   </p>
@@ -300,25 +300,37 @@
 <!-- BENCHMARK -->
 <section id="benchmark">
   <div class="section-label">// THE NUMBERS</div>
-  <h2>171M rows/sec. One node. Real data.</h2>
+  <h2>172M rows/sec. One node. Under 1 second.</h2>
   <p class="section-sub">
-    5 analytical queries across 4 years of NYC Yellow Cab data — 48 Parquet files,
-    ~685 million rows. No cluster. No JVM. No Spark executor overhead.
+    5 analytical queries. 4 years of NYC Yellow Cab open data. 48 Parquet files. 167,858,646 rows.
+    Total wall time: <strong style="color:var(--duck);">971ms</strong> — on a single workstation, no cluster, no cloud bill.
   </p>
 
   <div class="bench-box">
     <div style="text-align:center; margin-bottom:1.5rem;">
-      <div class="bench-number">171,000,000</div>
-      <div class="bench-label">rows / second · Intel Ultra 7 265KF · NVMe · DuckDB 1.4.4</div>
+      <div class="bench-number">172,871,932</div>
+      <div class="bench-label">rows / second · Intel Ultra 7 265KF · NVMe SSD · DuckDB 1.4.4 · verified 2026-04-08</div>
     </div>
     <div class="bench-grid">
-      <div class="bench-stat"><div class="val">~685M</div><div class="lbl">Total rows scanned</div></div>
-      <div class="bench-stat"><div class="val">48</div><div class="lbl">Parquet files (4 years)</div></div>
+      <div class="bench-stat"><div class="val">167,858,646</div><div class="lbl">Unique rows (4 years)</div></div>
+      <div class="bench-stat"><div class="val">48</div><div class="lbl">Parquet files</div></div>
       <div class="bench-stat"><div class="val">5</div><div class="lbl">Analytical queries</div></div>
-      <div class="bench-stat"><div class="val">~4s</div><div class="lbl">Total wall time</div></div>
+      <div class="bench-stat"><div class="val" style="color:var(--duck);">971ms</div><div class="lbl">Total wall time</div></div>
       <div class="bench-stat"><div class="val">$0</div><div class="lbl">Cluster cost</div></div>
       <div class="bench-stat"><div class="val">1</div><div class="lbl">Machine needed</div></div>
     </div>
+  </div>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.4rem;margin:1rem 0;font-size:0.88rem;color:var(--muted);line-height:1.7;">
+    <strong style="color:var(--text);">What these numbers actually mean</strong><br/>
+    167M is the real unique row count — 2022 through 2025 NYC taxi trips, one row per trip.
+    Each query scans all 4 years independently, so the DuckDB engine processed roughly
+    <strong style="color:var(--text);">~685M total row-scans</strong> across all 5 queries combined (some queries touch the full dataset
+    multiple times). All of that in 971ms. The throughput figure divides total unique rows
+    by wall time — a conservative measurement. The engine is doing more work than that number implies.
+    <br/><br/>
+    <strong style="color:var(--text);">Hardware:</strong> Intel Ultra 7 265KF (20 cores), NVMe SSD local storage, 64GB RAM, DuckDB 1.4.4.
+    These files were on <em>local NVMe</em> — not S3. See the S3 section below for the honest caveat on that.
   </div>
 
   <div class="cert-row">
@@ -360,12 +372,11 @@
 <!-- PIPELINE -->
 <section id="pipeline">
   <div class="section-label">// HOW IT WORKS</div>
-  <h2>Your data stays in your cloud.<br />My compute does the work.</h2>
+  <h2>Your data. My compute. No cluster tax.</h2>
   <p class="section-sub">
-    You grant read access to your S3 bucket, Azure Blob container, or GCP bucket.
-    I spin up a high-performance compute node — locally or on a cheap cloud VM —
-    and DuckDB reads your data directly from object storage. No copying. No cluster.
-    Results delivered as Parquet, CSV, or a live Streamlit dashboard.
+    You grant scoped read access to your cloud storage. I run DuckDB on a high-performance node,
+    deliver results as Parquet, CSV, or a live dashboard — then recommend the right long-term architecture
+    for your data volume and budget.
   </p>
 
   <div class="pipeline-box"><span class="hl">YOUR DATA (stays in your cloud)</span>
@@ -374,20 +385,20 @@
   <span class="az">Azure Blob</span>     abfss://container@account.dfs.core.windows.net/
   <span class="gcp">GCP Storage</span>   gs://your-bucket/data/*.parquet
          │
-         │  read credentials (scoped, read-only)
+         │  scoped read-only credentials
          │
          ▼
-<span class="hl">COMPUTE NODE (Intel Ultra 7 / cloud VM)</span>
+<span class="hl">COMPUTE NODE  (bare-metal NVMe or NVMe cloud instance)</span>
 
   DuckDB + httpfs / azure / gcs extension
-  ┌─────────────────────────────────────────────────────┐
-  │  LOAD httpfs;  SET s3_region='us-east-1';           │
-  │  SET s3_access_key_id='...';                        │
-  │                                                     │
-  │  SELECT month, SUM(revenue), AVG(margin)            │
-  │  FROM read_parquet('s3://your-bucket/sales/*.parquet│
-  │  GROUP BY month ORDER BY month;                     │
-  └─────────────────────────────────────────────────────┘
+  ┌──────────────────────────────────────────────────────┐
+  │  LOAD httpfs;  SET s3_region='us-east-1';            │
+  │  SET s3_access_key_id='...';                         │
+  │                                                      │
+  │  SELECT month, SUM(revenue), AVG(margin)             │
+  │  FROM read_parquet('s3://your-bucket/sales/*.parquet'│
+  │  GROUP BY month ORDER BY month;                      │
+  └──────────────────────────────────────────────────────┘
          │
          │  results
          ▼
@@ -395,13 +406,47 @@
 
   ├── results.parquet  →  written back to your bucket
   ├── report.csv       →  emailed / shared directly
-  └── dashboard.py     →  Streamlit app you host or I host
+  └── dashboard        →  Streamlit app, hosted anywhere
 </div>
 
-  <p style="font-size:0.88rem;color:var(--muted);">
-    DuckDB reads Parquet directly from object storage — no full download required for most analytical queries.
-    Columnar predicate pushdown means only the columns and rows your query touches are transferred.
-  </p>
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.4rem;margin:1rem 0;font-size:0.88rem;line-height:1.8;">
+    <strong style="color:var(--duck);">Honest take on S3 as a data lake</strong><br/>
+    <span style="color:var(--muted);">
+    S3 object storage tops out at roughly <strong style="color:var(--text);">100–500 MB/s</strong> per connection.
+    A local NVMe drive delivers <strong style="color:var(--text);">3,000–7,000 MB/s</strong> — a 10–50× I/O advantage.
+    DuckDB's httpfs uses columnar predicate pushdown to minimize what it downloads from S3,
+    which helps significantly, but physics still wins: if your dataset is large and your queries
+    are wide, S3 is the bottleneck, not DuckDB.
+    <br/><br/>
+    The 172M rows/sec benchmark ran against <strong style="color:var(--text);">local NVMe</strong>.
+    Against S3 with the same hardware and the same queries, expect <strong style="color:var(--text);">5–20× slower</strong>
+    depending on file sizes, network, and how selective your queries are.
+    <br/><br/>
+    <strong style="color:var(--text);">That said — you still save money over Databricks.</strong>
+    Even at 5× slower, a $200/month bare-metal NVMe node running DuckDB beats a $5,000/month
+    Databricks cluster reading the same S3 data. The recommendation depends on your data volume
+    and query patterns.
+    </span>
+  </div>
+
+  <div style="background:#0d1f0d;border:1px solid var(--green);border-radius:8px;padding:1.2rem 1.4rem;margin:1rem 0;font-size:0.88rem;line-height:1.8;">
+    <strong style="color:var(--green);">Recommendation: transition hot data to NVMe</strong><br/>
+    <span style="color:var(--muted);">
+    For recurring analytical workloads — daily reports, ML feature pipelines, compliance queries —
+    the right architecture is: <strong style="color:var(--text);">S3/Blob/GCS for cold archival storage, NVMe for hot analytical compute.</strong>
+    Sync your hot dataset once to a bare-metal or NVMe cloud instance, process at full speed,
+    write results back to object storage. You get S3 durability for your source data and
+    NVMe throughput for your queries.
+    <br/><br/>
+    <strong style="color:var(--text);">Bare-metal options worth knowing:</strong><br/>
+    · Hetzner AX102 — 192GB RAM, NVMe, dedicated, ~$250/month (exceptional value)<br/>
+    · AWS i4i instances — up to 30TB local NVMe SSD, purpose-built for analytics<br/>
+    · GCP Local SSD — up to 9TB, 2.4M IOPS, available on most instance families<br/>
+    · Azure Lsv3 — NVMe local storage, built for storage-intensive workloads<br/>
+    <br/>
+    I can audit your current workload and tell you exactly which tier makes sense.
+    </span>
+  </div>
 </section>
 
 <!-- WHY DUCKDB -->
@@ -535,6 +580,14 @@
     <div class="service-card">
       <h3>📐 Architecture Review</h3>
       <p>Async review of your current data pipelines — any cloud. Written recommendations with specific, actionable improvements. Delivered in 48 hours.</p>
+    </div>
+    <div class="service-card">
+      <h3>⚡ Bare-Metal / NVMe Migration</h3>
+      <p>Audit your S3 data lake for workloads that belong on NVMe. Design the hot/cold split — NVMe for compute, object storage for archival. Get DuckDB throughput you can actually feel.</p>
+    </div>
+    <div class="service-card" style="border-color:#a371f7;">
+      <h3 style="color:#a371f7;">🔐 Post-Quantum Secured Pipelines</h3>
+      <p>Data pipelines secured with NIST-standard post-quantum cryptography — ML-DSA-65 signing and ML-KEM key exchange. Tamper-evident audit logs. Designed for healthcare, finance, and government workloads that need to prove chain-of-custody today and remain secure against quantum threats tomorrow.</p>
     </div>
   </div>
 </section>
