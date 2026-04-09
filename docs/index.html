@@ -45,21 +45,17 @@
     .nav-links a:hover { color: var(--text); }
 
     /* ── SECTIONS ── */
-    section { max-width: 960px; margin: 0 auto; padding: 4rem 2rem; }
+    section { max-width: 960px; margin: 0 auto; padding: 2rem 2rem; }
     .section-label { color: var(--duck); font-size: 0.78rem; font-weight: 700;
-                     letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.5rem; }
-    h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.6rem; line-height: 1.2; }
-    .section-sub { color: var(--muted); font-size: 1.05rem; margin-bottom: 2.5rem; max-width: 640px; }
+                     letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.4rem; }
+    h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; line-height: 1.2; }
+    .section-sub { color: var(--muted); font-size: 1.05rem; margin-bottom: 1.5rem; max-width: 640px; }
 
     /* ── HERO ── */
     #hero {
-      min-height: 80vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
       max-width: 960px;
       margin: 0 auto;
-      padding: 5rem 2rem 3rem;
+      padding: 1.5rem 2rem 1rem;
     }
     .hero-badge {
       display: inline-block;
@@ -133,8 +129,8 @@
       background: var(--surface);
       border: 1px solid var(--duck);
       border-radius: 10px;
-      padding: 2rem;
-      margin: 2.5rem 0;
+      padding: 1.5rem;
+      margin: 1.2rem 0;
     }
     .bench-number {
       font-size: clamp(2.5rem, 6vw, 4rem);
@@ -149,7 +145,7 @@
     .bench-stat .lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
 
     /* ── CERTS ── */
-    .cert-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .cert-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.5rem; }
     .cert-badge {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -168,14 +164,14 @@
       background: #010409;
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 1.8rem 2rem;
+      padding: 1.2rem 1.5rem;
       font-family: "JetBrains Mono", "Fira Code", monospace;
       font-size: 0.82rem;
-      line-height: 1.8;
+      line-height: 1.7;
       overflow-x: auto;
       white-space: pre;
       color: var(--muted);
-      margin: 2rem 0;
+      margin: 1rem 0;
     }
     .pipeline-box .hl  { color: var(--duck); font-weight: 700; }
     .pipeline-box .aws { color: var(--aws); }
@@ -274,6 +270,7 @@
     <a href="#sql">The SQL</a>
     <a href="#services">Services</a>
     <a href="#contact">Contact</a>
+    <a href="resume.html">Resume</a>
     <a href="https://github.com/NixOSDude/DuckDB_Master" target="_blank">GitHub</a>
   </div>
 </nav>
@@ -292,7 +289,7 @@
     <a href="#benchmark" class="btn-secondary">See the Benchmark →</a>
   </div>
 
-  <div class="cloud-row" style="margin-top:2rem;">
+  <div class="cloud-row" style="margin-top:1rem;">
     <div class="cloud-badge aws">☁ AWS S3 + Athena</div>
     <div class="cloud-badge azure">☁ Azure Blob Storage</div>
     <div class="cloud-badge gcp">☁ GCP Cloud Storage</div>
@@ -325,20 +322,24 @@
   </div>
 
   <div class="cert-row">
-    <div class="cert-badge">
-      <div class="cert-icon">🏆</div>
-      <div>
-        <div class="cert-name">Databricks Certified</div>
-        <div class="cert-issuer">Data Engineer Associate · Scala</div>
+    <a href="https://credentials.databricks.com/embed/96e65e17-56d5-4682-a8f4-c9e77b2a7251" target="_blank" style="text-decoration:none;">
+      <div class="cert-badge" style="cursor:pointer;">
+        <div class="cert-icon">🏆</div>
+        <div>
+          <div class="cert-name">Databricks Certified</div>
+          <div class="cert-issuer">Associate Developer · Spark · Scala · Verify ↗</div>
+        </div>
       </div>
-    </div>
-    <div class="cert-badge">
-      <div class="cert-icon">☁️</div>
-      <div>
-        <div class="cert-name">AWS Solutions Architect</div>
-        <div class="cert-issuer">Associate — Amazon Web Services</div>
+    </a>
+    <a href="https://www.credly.com/badges/0957ca40-e7ba-4984-99b8-444E8DE58A18/public_url" target="_blank" style="text-decoration:none;">
+      <div class="cert-badge" style="cursor:pointer;">
+        <div class="cert-icon">☁️</div>
+        <div>
+          <div class="cert-name">AWS Certified</div>
+          <div class="cert-issuer">Cloud Practitioner — Amazon Web Services · Verify ↗</div>
+        </div>
       </div>
-    </div>
+    </a>
     <div class="cert-badge">
       <div class="cert-icon">🔷</div>
       <div>

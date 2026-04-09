@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scott Baker — Resume | DuckDB Data Master</title>
+  <style>
+    :root {
+      --bg:      #0d1117;
+      --surface: #161b22;
+      --border:  #30363d;
+      --text:    #e6edf3;
+      --muted:   #8b949e;
+      --duck:    #ffcc00;
+      --green:   #3fb950;
+      --blue:    #58a6ff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.7;
+    }
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      z-index: 100;
+    }
+    .nav-logo { font-weight: 700; font-size: 1.1rem; color: var(--duck); }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; margin-left: 1.8rem; }
+    .nav-links a:hover { color: var(--text); }
+
+    .page { max-width: 860px; margin: 0 auto; padding: 3rem 2rem 5rem; }
+
+    .resume-header { margin-bottom: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 1.5rem; }
+    .resume-header h1 { font-size: 2.2rem; font-weight: 800; margin-bottom: 0.3rem; }
+    .resume-header .tagline { color: var(--duck); font-weight: 600; font-size: 1rem; margin-bottom: 0.8rem; }
+    .resume-header .contact-line { color: var(--muted); font-size: 0.9rem; }
+    .resume-header .contact-line a { color: var(--blue); text-decoration: none; }
+
+    h2 {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--duck);
+      margin: 2rem 0 1rem;
+      padding-bottom: 0.4rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .summary-box {
+      background: var(--surface);
+      border-left: 3px solid var(--duck);
+      border-radius: 0 8px 8px 0;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+    .summary-box ul { padding-left: 1.4rem; margin-top: 0.6rem; }
+    .summary-box li { margin-bottom: 0.4rem; color: var(--muted); }
+    .summary-box li strong { color: var(--text); }
+
+    .job { margin-bottom: 2rem; }
+    .job-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 0.3rem; }
+    .job-title { font-weight: 700; font-size: 1rem; }
+    .job-company { color: var(--duck); font-weight: 600; }
+    .job-dates { color: var(--muted); font-size: 0.85rem; }
+    .job ul { padding-left: 1.4rem; margin-top: 0.6rem; }
+    .job li { color: var(--muted); margin-bottom: 0.3rem; font-size: 0.92rem; }
+    .job li strong { color: var(--text); }
+
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px,1fr)); gap: 1rem; margin-top: 0.5rem; }
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+      transition: border-color 0.2s;
+    }
+    .cert-card:hover { border-color: var(--duck); }
+    .cert-card .cert-name { font-weight: 700; margin-bottom: 0.3rem; }
+    .cert-card .cert-issuer { color: var(--muted); font-size: 0.85rem; margin-bottom: 0.6rem; }
+    .cert-card a {
+      font-size: 0.82rem;
+      color: var(--blue);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.7rem;
+      border-radius: 4px;
+      display: inline-block;
+    }
+    .cert-card a:hover { border-color: var(--blue); }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap: 0.8rem; margin-top: 0.5rem; }
+    .skill-group { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 1rem; }
+    .skill-group .label { font-weight: 700; font-size: 0.85rem; color: var(--duck); margin-bottom: 0.4rem; }
+    .skill-group p { font-size: 0.85rem; color: var(--muted); }
+
+    .edu-item { margin-bottom: 1rem; }
+    .edu-item .school { font-weight: 700; }
+    .edu-item .degree { color: var(--muted); font-size: 0.9rem; }
+
+    .print-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: var(--duck);
+      color: #000;
+      font-weight: 700;
+      padding: 0.7rem 1.4rem;
+      border-radius: 6px;
+      cursor: pointer;
+      border: none;
+      font-size: 0.9rem;
+    }
+    @media print {
+      body { background: #fff; color: #000; }
+      nav, .print-btn { display: none; }
+      .summary-box { background: #f9f9f9; border-color: #999; }
+      .cert-card, .skill-group, .job { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">🦆 DuckDB Data Master</div>
+  <div class="nav-links">
+    <a href="index.html">← Home</a>
+    <a href="mailto:scott@duckdatamaster.guru">scott@duckdatamaster.guru</a>
+  </div>
+</nav>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="resume-header">
+    <h1>Scott Baker</h1>
+    <div class="tagline">Data Engineer · DuckDB Specialist · Databricks Certified · AWS Certified</div>
+    <div class="contact-line">
+      <a href="mailto:scott@duckdatamaster.guru">scott@duckdatamaster.guru</a> ·
+      <a href="https://duckdatamaster.guru">duckdatamaster.guru</a> ·
+      <a href="https://github.com/NixOSDude/DuckDB_Master">github.com/NixOSDude/DuckDB_Master</a>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <h2>Professional Summary</h2>
+  <div class="summary-box">
+    <p>
+      Data engineer with a background in enterprise IT security and systems administration,
+      specializing in high-performance columnar analytics using DuckDB, Apache Spark, and cloud-native
+      data pipelines (AWS, Azure, GCP). Since December 2022, while managing a long-term medical
+      disability, I have been in continuous full-time technical development — earning industry
+      certifications, architecting distributed data systems, and benchmarking production workloads
+      at <strong>171M rows/sec on a single node</strong> using DuckDB against 685M rows of real-world data.
+    </p>
+    <ul>
+      <li><strong>Certified:</strong> Databricks Associate Developer for Apache Spark (Scala) · AWS Certified Cloud Practitioner</li>
+      <li><strong>Benchmark:</strong> 171M rows/sec — 5 analytical queries across 685M NYC taxi records, single node, zero cluster</li>
+      <li><strong>Stack:</strong> DuckDB · Apache Spark 3.5 · Scala (Pure FP) · Python · AWS S3 · Azure Blob · GCP Storage · Parquet · Streamlit</li>
+      <li><strong>Background:</strong> HIPAA compliance, HITRUST audit remediation, CrowdStrike, CyberArk, Qualys — enterprise security depth</li>
+    </ul>
+  </div>
+
+  <!-- TECHNICAL SKILLS -->
+  <h2>Technical Skills</h2>
+  <div class="skills-grid">
+    <div class="skill-group">
+      <div class="label">Data Engineering</div>
+      <p>DuckDB, Apache Spark 3.5, Scala (FP), PySpark, Parquet, sbt, Databricks</p>
+    </div>
+    <div class="skill-group">
+      <div class="label">Cloud Platforms</div>
+      <p>AWS (S3, EC2, Glue, Athena) · Azure (Blob, ADLS Gen2, Synapse) · GCP (GCS, BigQuery)</p>
+    </div>
+    <div class="skill-group">
+      <div class="label">Analytics & Visualization</div>
+      <p>DuckDB SQL, Streamlit, Plotly, Pandas, columnar pipeline design</p>
+    </div>
+    <div class="skill-group">
+      <div class="label">Security & Compliance</div>
+      <p>Qualys, CrowdStrike, CyberArk, HITRUST, HIPAA, vulnerability management</p>
+    </div>
+    <div class="skill-group">
+      <div class="label">Systems</div>
+      <p>Linux (Ubuntu/RHEL), Active Directory, VMware, Hyper-V, SCCM, PLESK</p>
+    </div>
+    <div class="skill-group">
+      <div class="label">Infrastructure</div>
+      <p>VPS hardening, NixOS, post-quantum crypto (ML-DSA-65), bare-metal orchestration</p>
+    </div>
+  </div>
+
+  <!-- EXPERIENCE -->
+  <h2>Professional Experience</h2>
+
+  <div class="job">
+    <div class="job-header">
+      <span><span class="job-company">Independent Data Engineering</span> — <span class="job-title">Data Engineer / Consultant</span></span>
+      <span class="job-dates">December 2022 – Present</span>
+    </div>
+    <ul>
+      <li><strong>Benchmarked</strong> DuckDB at 171M rows/sec processing 685M NYC Yellow Cab records (2022–2025) across 48 Parquet files on a single node — zero cluster, zero JVM overhead.</li>
+      <li><strong>Architected</strong> multi-cloud data ingestion pipelines reading directly from AWS S3, Azure Blob Storage, and GCP Cloud Storage using DuckDB's httpfs, azure, and gcs extensions.</li>
+      <li><strong>Engineered</strong> HazyNet: a multi-node standalone Apache Spark 3.5 cluster in Scala with pure functional programming patterns and CUDA integration on RTX 3060.</li>
+      <li><strong>Earned</strong> Databricks Certified Associate Developer for Apache Spark (Scala) and AWS Certified Cloud Practitioner while maintaining full technical stack depth.</li>
+      <li><strong>Built</strong> real-time Streamlit analytics dashboards backed by DuckDB — interactive columnar analytics with zero cloud dependency.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span><span class="job-company">Ultra Clean Technologies</span> — <span class="job-title">IT Analyst</span></span>
+      <span class="job-dates">June 2019 – August 2022</span>
+    </div>
+    <ul>
+      <li><strong>Automated</strong> enterprise-wide hardware deployments by creating and pushing OS images via MS SCCM.</li>
+      <li><strong>Administered</strong> Active Directory and Office 365/Teams deployments for a global user base.</li>
+      <li><strong>Governed</strong> VMware Horizon virtual machines and managed CCURE secure access systems.</li>
+      <li><strong>Managed</strong> CrowdStrike endpoint protection and CyberArk privilege management platforms.</li>
+      <li><strong>Executed</strong> rigorous patch management schedules through SCCM to maintain system integrity.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span><span class="job-company">Cognizant (TJMAXX Project)</span> — <span class="job-title">Desktop & Systems Support</span></span>
+      <span class="job-dates">April 2018 – June 2019</span>
+    </div>
+    <ul>
+      <li><strong>Restored</strong> mission-critical "Store Down" scenarios under pressure to ensure business continuity.</li>
+      <li><strong>Supported</strong> virtual servers and in-store infrastructure via VNC and Hyper-V remote control.</li>
+      <li><strong>Governed</strong> remote access to POS registers and backend retail applications for 24/7 uptime.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span><span class="job-company">CIOX Health, Inc.</span> — <span class="job-title">Jr. Information Security Analyst & Tech Support</span></span>
+      <span class="job-dates">April 2014 – October 2017</span>
+    </div>
+    <ul>
+      <li><strong>Engineered</strong> an AWS-based medical records retrieval system with HIPAA-compliant secure portals.</li>
+      <li><strong>Analyzed</strong> security data using Qualys; led intrusion detection audits and firewall security configuration.</li>
+      <li><strong>Remediated</strong> audit findings for HITRUST certification and led HIPAA compliance initiatives.</li>
+      <li><strong>Orchestrated</strong> vulnerability management and patch cycles for the entire server fleet.</li>
+    </ul>
+  </div>
+
+  <div class="job">
+    <div class="job-header">
+      <span><span class="job-company">Endurance International Group</span> — <span class="job-title">Level 3 Linux Support / Web Hosting</span></span>
+      <span class="job-dates">July 2012 – February 2014</span>
+    </div>
+    <ul>
+      <li><strong>Advanced</strong> to Level 3 Linux support; configured VPS setups on PLESK and managed high-traffic Linux servers.</li>
+      <li><strong>Managed</strong> 120+ client accounts including WordPress architecture, security hardening, and VPS configuration.</li>
+    </ul>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <h2>Certifications</h2>
+  <div class="cert-grid">
+    <div class="cert-card">
+      <div class="cert-name">🏆 Databricks Certified Associate Developer for Apache Spark</div>
+      <div class="cert-issuer">Databricks · Scala track</div>
+      <a href="https://credentials.databricks.com/embed/96e65e17-56d5-4682-a8f4-c9e77b2a7251" target="_blank">Verify Credential ↗</a>
+    </div>
+    <div class="cert-card">
+      <div class="cert-name">☁️ AWS Certified Cloud Practitioner</div>
+      <div class="cert-issuer">Amazon Web Services</div>
+      <a href="https://www.credly.com/badges/0957ca40-e7ba-4984-99b8-444E8DE58A18/public_url" target="_blank">Verify on Credly ↗</a>
+    </div>
+  </div>
+
+  <!-- EDUCATION -->
+  <h2>Education</h2>
+  <div class="edu-item">
+    <div class="school">Western Governors University</div>
+    <div class="degree">Information Technology · 2008 – 2011 · 3 years completed</div>
+  </div>
+  <div class="edu-item">
+    <div class="school">The Knox School</div>
+    <div class="degree">High School Diploma · 1985 – 1990</div>
+  </div>
+
+</div>
+
+<button class="print-btn" onclick="window.print()">Print / Save PDF</button>
+
+</body>
+</html>
