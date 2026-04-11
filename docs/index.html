@@ -301,6 +301,7 @@
   <div class="nav-logo">🦆 DuckDB Data Master</div>
   <div class="nav-links">
     <a href="#how">How It Works</a>
+    <a href="#engine">Capabilities</a>
     <a href="#services">Services &amp; Pricing</a>
     <a href="#proof">Benchmark</a>
     <a href="#architect">About</a>
@@ -389,6 +390,51 @@
   </div>
 </section>
 
+<!-- ── SOVEREIGN SQL ENGINE ── -->
+<section id="engine">
+  <div class="section-label">// SOVEREIGN SQL ENGINE</div>
+  <h2>Capabilities your current stack<br/>doesn't have.</h2>
+  <p class="section-sub">
+    Alongside raw speed, I built a custom SQL extension layer that solves problems standard DuckDB — and every other tool — cannot answer out of the box.
+  </p>
+
+  <div class="target-box" style="border-color: var(--duck); background: #0a0d12;">
+    <div class="target-col">
+      <h3 class="target-title" style="color: var(--duck);">Automatic Data Normalization</h3>
+      <p style="font-size: 0.9rem; color: var(--text);">
+        Your CRM, ERP, or product catalog stores data as key-value rows — one row per attribute per entity. Standard SQL requires you to hard-code every field name. My engine discovers the structure dynamically and rebuilds it as a clean, queryable wide table automatically. No manual pivot logic. No brittle CASE statements. Works on any data shape.
+      </p>
+    </div>
+    <div class="target-col">
+      <h3 class="target-title" style="color: var(--blue);">Graph & Hierarchy Traversal</h3>
+      <p style="font-size: 0.9rem; color: var(--text);">
+        Who reports to whom, three levels deep? Which suppliers feed into this part? What accounts are connected to this flagged transaction? Standard SQL cannot walk relationships without brittle recursive queries. My engine traverses any directed graph in a single SQL call — org charts, supply chains, category trees, dependency graphs — returning every node, its depth, and the exact path to reach it.
+      </p>
+    </div>
+    <div class="target-col">
+      <h3 class="target-title" style="color: var(--green);">Overnight Change Detection</h3>
+      <p style="font-size: 0.9rem; color: var(--text);">
+        Compare any two snapshots of your data and get a precise, row-level breakdown of what was added, removed, or modified — with the full before and after state as JSON. Automated data quality monitoring, pipeline validation, slowly changing dimensions, audit trails. One SQL call replaces hundreds of lines of FULL OUTER JOIN logic. Runs nightly without supervision.
+      </p>
+    </div>
+  </div>
+
+  <div class="sovereign-delivery" style="border-color: var(--purple); background: #0d0812;">
+    <div class="sdl-col">
+      <div class="sdl-title" style="color: var(--purple);">Column-Level Encryption in SQL</div>
+      <div class="sdl-body">Sensitive fields — email, phone, pricing, IP — encrypted individually using ML-KEM-768 + AES-256-GCM before they enter any pipeline. The rest of the table is fully queryable. Only the keyholder can decrypt. A stolen database export reveals nothing. No other fractional engineer offers this.</div>
+    </div>
+    <div class="sdl-col">
+      <div class="sdl-title" style="color: var(--purple);">Cryptographically Signed Deliveries</div>
+      <div class="sdl-body">Every report or dataset I deliver can be signed with a post-quantum digital signature. Your team verifies the signature against my public key to confirm the data is exactly what I produced — unmodified, authenticated, tamper-evident. Chain of custody, in SQL.</div>
+    </div>
+    <div class="sdl-col">
+      <div class="sdl-title" style="color: var(--purple);">Future-Proof Against Quantum Attacks</div>
+      <div class="sdl-body">RSA and ECC encryption — what protects most data today — will be broken by quantum computers. NIST finalized the post-quantum standards in 2024. My encryption stack uses those standards now. Data encrypted today stays safe when quantum arrives.</div>
+    </div>
+  </div>
+</section>
+
 <!-- ── SERVICES & PRICING ── -->
 <section id="services">
   <div class="section-label">// SERVICES &amp; PRICING</div>
@@ -407,7 +453,7 @@
     <div class="service-card featured-purple">
       <span class="service-tag tag-purple">Unique Capability</span>
       <h3>Post-Quantum Secured Pipeline</h3>
-      <p>Column-level encryption built directly into SQL using ML-KEM-768 + AES-256-GCM. Sensitive fields are encrypted before they enter any pipeline and can only be decrypted by the keyholder. No other fractional consultant offers this. Future-proof against quantum attacks. Ideal for IP-sensitive data, financial records, and proprietary datasets.</p>
+      <p>Three capabilities no other fractional engineer offers: <strong style="color:var(--text);">column-level encryption</strong> — sensitive fields encrypted individually in SQL, rest of the table fully queryable, only the keyholder reads the plaintext; <strong style="color:var(--text);">signed data deliveries</strong> — every report cryptographically authenticated so you can prove it came from me unmodified; <strong style="color:var(--text);">quantum-resistant standards</strong> — ML-KEM-768 + AES-256-GCM, NIST-finalized 2024, safe when quantum computers arrive. Ideal for proprietary data, IP-sensitive pipelines, and clients who need chain of custody.</p>
       <span class="service-price purple">$5,000 – $12,000 flat</span>
     </div>
 
