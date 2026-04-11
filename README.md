@@ -44,16 +44,6 @@ Hardware: Intel Ultra 7 265KF (20-core) · NVMe SSD · 64GB RAM · Arch Linux ·
 
 ---
 
-## What's in This Repo
-
-```
-docs/
-  index.html   — duckdatamaster.guru (GitHub Pages)
-  resume.html  — Full resume
-```
-
----
-
 ## Services
 
 - DuckDB pipeline builds — S3, Azure Blob, GCP Storage
