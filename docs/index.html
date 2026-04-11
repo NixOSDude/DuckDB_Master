@@ -193,6 +193,15 @@
     }
     .bhs-lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.35rem; }
 
+    /* ── TRUST / RESUME ── */
+    .trust-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 2rem;
+      margin-top: 1.5rem;
+    }
+
     /* ── CONTACT ── */
     .contact-box {
       background: var(--surface);
@@ -236,6 +245,8 @@
     <a href="#how">How It Works</a>
     <a href="#services">Services</a>
     <a href="#proof">The Proof</a>
+    <a href="#architect">Why Trust Me</a>
+    <a href="resume.html" style="color: var(--duck);">Resume</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -400,6 +411,32 @@
   </p>
 </section>
 
+<section id="architect">
+  <div class="section-label">// THE ARCHITECT</div>
+  <h2>Enterprise security discipline.<br/>Applied to your business.</h2>
+  <p class="section-sub">
+    When you hand over your proprietary business data, you need absolute certainty it is safe. Before shifting to fractional consulting, I spent a decade securing data systems for heavily regulated enterprise environments.
+  </p>
+
+  <div class="trust-box">
+    <div class="target-box" style="background: transparent; border: none; padding: 0; margin: 0;">
+      <div class="target-col">
+        <h3 style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">🔒 Security & Compliance Veteran</h3>
+        <p style="font-size: 0.9rem; color: var(--muted);">Former Security Engineer with deep experience architecting systems for HIPAA and HITRUST compliance. Your data is handled with military-grade precision and unshakeable privacy protocols.</p>
+      </div>
+      <div class="target-col">
+        <h3 style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">⚙️ 12+ Years IT Architecture</h3>
+        <p style="font-size: 0.9rem; color: var(--muted);">I have built, broken, and rescued complex systems across AWS, Azure, and GCP. I don't just write queries; I design resilient, cost-effective digital infrastructure.</p>
+      </div>
+      <div class="target-col">
+        <h3 style="color: var(--duck); font-size: 1.1rem; margin-bottom: 0.5rem;">📄 The Full Resume</h3>
+        <p style="font-size: 0.9rem; color: var(--muted);">Want to see the exact certifications, roles, and enterprise systems I have engineered over the last decade?</p>
+        <a href="resume.html" class="btn-secondary" style="display: inline-block; margin-top: 0.8rem; padding: 0.6rem 1.2rem; font-size: 0.85rem;">View Full Resume →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
 <script>
 const DUCK = '#ffcc00'; const MUTED = '#8b949e'; const SURFACE = '#161b22'; const GREEN = '#3fb950'; const BLUE = '#58a6ff';
@@ -439,7 +476,7 @@ Plotly.newPlot('chart-monthly', [
 </section>
 
 <footer>
-  © 2026 Scott Baker · duckdatamaster.guru · Fractional Data Architecture
+  © 2026 Scott Baker · Based in Phoenix, AZ · Fractional Data Architecture
 </footer>
 
 </body>
