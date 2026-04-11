@@ -102,6 +102,20 @@
     }
     .btn-secondary:hover { border-color: var(--duck); }
 
+    /* ── TARGET LOCK ── */
+    .target-box {
+      background: #0d1f0d;
+      border: 1px solid var(--green);
+      border-radius: 8px;
+      padding: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .target-col { flex: 1 1 300px; }
+    .target-title { font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: 700; }
+
     /* ── CLOUD BADGES ── */
     .cloud-row {
       display: flex;
@@ -404,7 +418,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-logo">🦆 DuckDB Data Master</div>
   <div class="nav-links">
@@ -415,13 +428,11 @@
     <a href="#sql">The SQL</a>
     <a href="#services">Services</a>
     <a href="#contact">Contact</a>
-    <a href="duckpqc.pub" download style="color:#a371f7;">PQC Key ↓</a>
     <a href="resume.html">Resume</a>
     <a href="https://github.com/NixOSDude/DuckDB_Master" target="_blank">GitHub</a>
   </div>
 </nav>
 
-<!-- HERO -->
 <div id="hero">
   <div class="hero-badge">DATABRICKS CERTIFIED · AWS SOLUTIONS ARCHITECT ASSOCIATE · AZURE · GCP</div>
   <h1>Single-node analytics.<br /><span>No Spark. No cluster bill.</span></h1>
@@ -443,7 +454,19 @@
   </div>
 </div>
 
-<!-- BENCHMARK -->
+<div id="target-audience" style="max-width: 1140px; margin: 0 auto; padding: 0 2.5rem 2rem;">
+  <div class="target-box">
+    <div class="target-col">
+      <h3 class="target-title" style="color: var(--green);">🚀 Series A & B Startups</h3>
+      <p style="font-size: 0.9rem; color: var(--text);">Burning cash on Databricks or Snowflake? Stop paying a "cluster tax" for workloads that easily fit on a single NVMe node. I drop your cloud bill and speed up your data pipelines.</p>
+    </div>
+    <div class="target-col">
+      <h3 class="target-title" style="color: var(--blue);">📈 Digital Marketing Agencies</h3>
+      <p style="font-size: 0.9rem; color: var(--text);">Need fast analytics but don't want to manage infrastructure or hire a $150k/yr Data Engineer? I act as your invisible data backend, processing your clickstreams and delivering fully branded dashboards.</p>
+    </div>
+  </div>
+</div>
+
 <section id="benchmark">
 
   <div class="sovereign-header">
@@ -618,7 +641,6 @@
   </div>
 </section>
 
-<!-- CHARTS -->
 <section id="charts">
   <div class="section-label">// LIVE DATA — NYC YELLOW CAB 2022–2025</div>
   <h2>The data. All of it. Interactive.</h2>
@@ -639,7 +661,6 @@
   </p>
 </section>
 
-<!-- PIPELINE -->
 <section id="pipeline">
   <div class="section-label">// HOW IT WORKS</div>
   <h2>Your data. My compute. No cluster tax.</h2>
@@ -676,7 +697,7 @@
 
   ├── results.parquet  →  written back to your bucket
   ├── report.csv       →  emailed / shared directly
-  └── dashboard        →  Streamlit app, hosted anywhere
+  └── dashboard        →  Streamlit app (100% White-Labeled for your Agency)
 </div>
 
   <div style="background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:1.2rem 1.4rem;margin:1rem 0;font-size:0.88rem;line-height:1.8;">
@@ -719,7 +740,6 @@
   </div>
 </section>
 
-<!-- WHY DUCKDB -->
 <section id="why">
   <div class="section-label">// WHY IT MATTERS</div>
   <h2>Your Databricks bill is optional.</h2>
@@ -776,19 +796,6 @@
   </table>
 </section>
 
-<!-- SKRATR -->
-<section id="skr8tr">
-  <div class="section-label">// ALSO BUILT BY SCOTT BAKER</div>
-  <h2>Inventor &amp; Creator — <a href="https://skr8tr.online" target="_blank" rel="noopener" style="color:var(--duck);text-decoration:none;">skr8tr</a></h2>
-  <p class="section-sub">
-    skr8tr is a sovereign, masterless distributed systems framework built on post-quantum cryptography.
-    Every node authenticates via ML-DSA-65 signed tokens — no certificate authorities, no central broker, no single point of failure.
-    Commands propagate across a UDP mesh, each packet carrying a post-quantum signature verified on arrival.
-    Designed from first principles for air-gapped, regulated, and adversarial environments where you cannot afford to trust the network.
-  </p>
-</section>
-
-<!-- SQL -->
 <section id="sql">
   <div class="section-label">// THE CODE WE ACTUALLY RAN</div>
   <h2>Plain SQL. Verifiable results.</h2>
@@ -824,15 +831,22 @@
   </p>
 </section>
 
-<!-- SERVICES -->
 <section id="services">
   <div class="section-label">// WHAT I DO</div>
   <h2>Data engineering that ships.</h2>
   <p class="section-sub">Remote consulting. Fixed-scope engagements. AWS, Azure, and GCP. Results you can verify.</p>
 
   <div class="services-grid">
+    <div class="service-card" style="border-color:var(--duck);">
+      <h3 style="color:var(--duck);">⚡ The 48-Hour Rescue Pulse</h3>
+      <p><strong>Fixed Flat Fee.</strong> Send me your failing 10-hour Spark job. I will port it to DuckDB and run it on my NVMe node in seconds. You get the optimized Parquet and the architectural blueprint. Undeniable ROI.</p>
+    </div>
     <div class="service-card">
-      <h3>🔍 Cost Audit</h3>
+      <h3>📈 The Sovereign Backend (Retainer)</h3>
+      <p><strong>Flat Monthly Fee.</strong> Ideal for digital agencies. You sell dashboards to your clients. I process the massive data pipelines behind them on my compute. Zero infrastructure for your agency to manage.</p>
+    </div>
+    <div class="service-card">
+      <h3>🔍 Cost & Architecture Audit</h3>
       <p>Review your Databricks / Synapse / BigQuery spend. Identify workloads that move to DuckDB on a single node. Written cost-reduction plan within 48 hours.</p>
     </div>
     <div class="service-card">
@@ -840,44 +854,12 @@
       <p>End-to-end columnar pipeline — ingest from S3, Azure Blob, or GCP Storage, transform with DuckDB SQL, write results back to your bucket. Reproducible scripts you own.</p>
     </div>
     <div class="service-card">
-      <h3>📊 Streamlit Dashboard</h3>
-      <p>Interactive analytics dashboard backed by DuckDB. Reads live from your cloud storage. Deployed on a $20/month VPS or your existing infra. Zero cluster dependency.</p>
+      <h3>☁️ Cloud Storage Optimization</h3>
+      <p>Audit your S3 data lake for workloads that belong on NVMe. Design the hot/cold split — NVMe for compute, object storage for archival. Stop paying for slow I/O.</p>
     </div>
     <div class="service-card">
-      <h3>☁️ AWS Data Architecture</h3>
-      <p>S3 + Glue + Athena + DuckDB hybrid pipelines. Leveraging AWS Solutions Architect experience to build data lakes that scale without surprise bills.</p>
-    </div>
-    <div class="service-card">
-      <h3>🔷 Azure Data Engineering</h3>
-      <p>ADLS Gen2, Azure Blob, Synapse, and DuckDB integration. Migrate heavyweight Spark jobs to single-node DuckDB where the data volume allows it.</p>
-    </div>
-    <div class="service-card">
-      <h3>🌐 GCP / BigQuery Consulting</h3>
-      <p>GCP Cloud Storage + DuckDB pipelines. BigQuery cost reduction — identify queries that run faster and cheaper outside BigQuery on a local DuckDB node.</p>
-    </div>
-    <div class="service-card">
-      <h3>🏗️ Spark Migration</h3>
-      <p>Port SparkSQL jobs to standard DuckDB SQL. Remove cluster dependency for batch workloads. Works with AWS EMR, Azure HDInsight, and GCP Dataproc migrations.</p>
-    </div>
-    <div class="service-card">
-      <h3>📐 Architecture Review</h3>
-      <p>Async review of your current data pipelines — any cloud. Written recommendations with specific, actionable improvements. Delivered in 48 hours.</p>
-    </div>
-    <div class="service-card">
-      <h3>⚡ Bare-Metal / NVMe Migration</h3>
-      <p>Audit your S3 data lake for workloads that belong on NVMe. Design the hot/cold split — NVMe for compute, object storage for archival. Get DuckDB throughput you can actually feel.</p>
-    </div>
-    <div class="service-card" style="border-color:#a371f7;">
-      <h3 style="color:#a371f7;">🔐 Post-Quantum Secured Deliverables</h3>
-      <p>Every file I deliver — Parquet, CSV, report — is signed with <strong style="color:var(--text);">ML-DSA-65 (NIST FIPS 204)</strong>, the post-quantum digital signature standard. You get the data file, a detached <code>.sig</code> file, and a one-command verifier. Run it against my public key and know the file is authentic and untampered.</p>
-      <p style="margin-top:0.75rem;font-size:0.88rem;color:var(--muted);">
-        Designed for healthcare, finance, and government workloads that need provable chain-of-custody today and quantum resistance tomorrow.
-      </p>
-      <p style="margin-top:0.9rem;">
-        <a href="duckpqc.pub" download style="color:#a371f7;font-weight:600;text-decoration:none;border:1px solid #a371f7;padding:0.3rem 0.75rem;border-radius:4px;font-size:0.85rem;">
-          ↓ Download duckpqc.pub — Scott Baker's ML-DSA-65 public key
-        </a>
-      </p>
+      <h3>🏗️ Spark to DuckDB Migration</h3>
+      <p>Port heavy SparkSQL jobs to standard DuckDB SQL. Remove cluster dependency for batch workloads. Works with AWS EMR, Azure HDInsight, and GCP Dataproc.</p>
     </div>
   </div>
 </section>
@@ -979,7 +961,6 @@ Plotly.newPlot('chart-monthly', [
 }), { responsive: true, displayModeBar: false });
 </script>
 
-<!-- CONTACT -->
 <section id="contact">
   <div class="contact-box">
     <div class="section-label" style="text-align:center;">// LET'S TALK</div>
