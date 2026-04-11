@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sovereign Data Consulting — Scott Baker</title>
-  <meta name="description" content="Fractional data engineering. I turn chaotic spreadsheets and messy servers into clean, automated dashboards. No expensive data teams required." />
+  <title>DuckDB Data Master — Scott Baker | Fractional Data Engineering</title>
+  <meta name="description" content="I replace overpriced Databricks and Snowflake stacks with DuckDB. 172M rows/sec. 25x faster. 80% cheaper. Fixed-fee engagements. No data team required." />
   <style>
     :root {
       --bg:      #0d1117;
@@ -15,9 +15,8 @@
       --duck:    #ffcc00;
       --green:   #3fb950;
       --blue:    #58a6ff;
-      --azure:   #0078d4;
-      --gcp:     #4285f4;
-      --aws:     #ff9900;
+      --red:     #f85149;
+      --purple:  #bc8cff;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -132,11 +131,28 @@
     }
     .pipeline-box .hl  { color: var(--duck); font-weight: 700; }
     .pipeline-box .grn { color: var(--green); }
-    
+    .pipeline-box .blu { color: var(--blue); }
+
+    /* ── DATA NEVER LEAVES BOX ── */
+    .sovereign-delivery {
+      background: #0a0f1a;
+      border: 1px solid var(--blue);
+      border-radius: 10px;
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .sdl-col { flex: 1 1 260px; }
+    .sdl-title { color: var(--blue); font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+    .sdl-body { color: var(--muted); font-size: 0.9rem; }
+
     /* ── SERVICES ── */
     .services-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px,1fr));
       gap: 1.2rem;
     }
     .service-card {
@@ -145,10 +161,45 @@
       border-radius: 10px;
       padding: 1.8rem;
       transition: border-color 0.2s;
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
     }
     .service-card:hover { border-color: var(--duck); }
-    .service-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.8rem; color: var(--text); }
-    .service-card p { font-size: 0.9rem; color: var(--muted); }
+    .service-card.featured { border-color: var(--duck); background: #16130a; }
+    .service-card.featured-purple { border-color: var(--purple); background: #100a1a; }
+    .service-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .service-card p { font-size: 0.88rem; color: var(--muted); flex: 1; }
+    .service-price {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--duck);
+      background: #211c00;
+      border: 1px solid #3a3000;
+      border-radius: 4px;
+      padding: 0.25rem 0.6rem;
+      margin-top: 0.3rem;
+    }
+    .service-price.purple {
+      color: var(--purple);
+      background: #150a2a;
+      border-color: #2a1545;
+    }
+    .service-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      margin-bottom: 0.2rem;
+    }
+    .tag-gold    { background: #211c00; color: var(--duck); border: 1px solid #3a3000; }
+    .tag-purple  { background: #150a2a; color: var(--purple); border: 1px solid #2a1545; }
+    .tag-green   { background: #0d1f0d; color: var(--green); border: 1px solid #1a3a1a; }
+    .tag-blue    { background: #0a1628; color: var(--blue); border: 1px solid #0e2040; }
 
     /* ── COMPARISON TABLE ── */
     .compare-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; margin-top: 1rem; }
@@ -161,9 +212,9 @@
     .compare-table td { border: 1px solid var(--border); padding: 1rem; }
     .compare-table tr:nth-child(even) td { background: #0d1117; }
     .good { color: var(--green); font-weight: 700; }
-    .bad  { color: #f85149; }
+    .bad  { color: var(--red); }
 
-    /* ── BENCHMARK / NERD FLEX ── */
+    /* ── BENCHMARK ── */
     .sovereign-box {
       background: #0a0d12;
       border: 1px solid var(--duck);
@@ -193,7 +244,13 @@
     }
     .bhs-lbl { font-size: 0.8rem; color: var(--muted); margin-top: 0.35rem; }
 
-    /* ── TRUST / RESUME ── */
+    /* ── BENCHMARK PER-QUERY TABLE ── */
+    .query-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 1.2rem 0; }
+    .query-table th { background: #161b22; border: 1px solid var(--border); padding: 0.6rem 0.8rem; color: var(--muted); font-weight: 600; text-align: left; }
+    .query-table td { border: 1px solid var(--border); padding: 0.6rem 0.8rem; }
+    .query-table td.t { color: var(--duck); font-weight: 700; font-family: monospace; }
+
+    /* ── TRUST ── */
     .trust-box {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -234,250 +291,344 @@
     @media (max-width: 768px) {
       .bench-hero-stats { grid-template-columns: 1fr; }
       nav { padding: 1rem; flex-direction: column; gap: 1rem; }
+      .sovereign-delivery { flex-direction: column; }
     }
   </style>
 </head>
 <body>
 
 <nav>
-  <div class="nav-logo">Scott Baker | Fractional Data Architect</div>
+  <div class="nav-logo">🦆 DuckDB Data Master</div>
   <div class="nav-links">
     <a href="#how">How It Works</a>
-    <a href="#services">Services</a>
-    <a href="#proof">The Proof</a>
-    <a href="#architect">Why Trust Me</a>
+    <a href="#services">Services &amp; Pricing</a>
+    <a href="#proof">Benchmark</a>
+    <a href="#architect">About</a>
     <a href="resume.html" style="color: var(--duck);">Resume</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
 
+<!-- ── HERO ── -->
 <div id="hero">
-  <div class="hero-badge">12+ YEARS IT ARCHITECTURE · DATABRICKS & AWS CERTIFIED</div>
-  <h1>Stop fighting messy data.<br /><span>Get clear answers today.</span></h1>
+  <div class="hero-badge">12+ YEARS IT ARCHITECTURE · DATABRICKS CERTIFIED · AWS SOLUTIONS ARCHITECT</div>
+  <h1>Your Databricks bill is<br /><span>embarrassingly large.</span></h1>
   <p class="hero-sub">
-    I turn crashing spreadsheets, chaotic server dumps, and bloated cloud bills into automated, lightning-fast dashboards. No $150k/yr data engineer required.
+    I replace overpriced cloud data clusters with a purpose-built DuckDB engine that runs 25x faster and costs 80% less.
+    Fixed fees. No data team. No contracts. Results in days, not months.
   </p>
   <div class="hero-cta">
     <a href="#contact" class="btn-primary">Book a Free Data Audit</a>
-    <a href="#how" class="btn-secondary">See How It Works ↓</a>
+    <a href="#proof" class="btn-secondary">See the Benchmark ↓</a>
   </div>
 </div>
 
+<!-- ── TARGET AUDIENCE ── -->
 <div id="target-audience" style="max-width: 1140px; margin: 0 auto; padding: 0 2.5rem 2rem;">
   <div class="target-box">
     <div class="target-col">
-      <h3 class="target-title" style="color: var(--duck);">1. Zero Data Team?</h3>
-      <p style="font-size: 0.9rem; color: var(--text);">Running your business on manual Excel files and messy exports? I act as your invisible data department. I extract the data safely, clean it automatically, and hand you daily reports.</p>
+      <h3 class="target-title" style="color: var(--duck);">1. Startups Burning Cloud Cash</h3>
+      <p style="font-size: 0.9rem; color: var(--text);">Paying $5k–$15k/mo for Databricks or Snowflake to run reports that don't need a distributed cluster? I audit your setup, show you the savings, and migrate you. Typical result: 80% cost reduction, faster queries.</p>
     </div>
     <div class="target-col">
-      <h3 class="target-title" style="color: var(--blue);">2. Digital Agencies</h3>
-      <p style="font-size: 0.9rem; color: var(--text);">You sell results, but struggle with the backend data mess. I process your clients' clickstreams and ad data behind the scenes, delivering fully white-labeled dashboards you can resell.</p>
+      <h3 class="target-title" style="color: var(--blue);">2. Companies With Zero Data Team</h3>
+      <p style="font-size: 0.9rem; color: var(--text);">Running on manual Excel exports and broken CSV jobs? I act as your invisible data department — automated pipelines, clean daily reports, live dashboards. No $150k/yr data engineer required.</p>
     </div>
     <div class="target-col">
-      <h3 class="target-title" style="color: var(--green);">3. Startups Burning Cash</h3>
-      <p style="font-size: 0.9rem; color: var(--text);">Drowning in $10k+ Databricks or Snowflake bills for basic reporting? I bypass the expensive enterprise clusters and run your data 10x faster on optimized hardware for a fraction of the cost.</p>
+      <h3 class="target-title" style="color: var(--green);">3. Digital Agencies & E-Commerce</h3>
+      <p style="font-size: 0.9rem; color: var(--text);">You sell results but the backend data is a mess. I process client data behind the scenes, deliver fully white-labeled dashboards you can resell. Clickstreams, ad data, transaction data — all of it.</p>
     </div>
   </div>
 </div>
 
+<!-- ── HOW IT WORKS ── -->
 <section id="how">
   <div class="section-label">// THE PROCESS</div>
-  <h2>Your Data. My Compute. Fast Results.</h2>
+  <h2>Your data stays yours.<br/>I bring the compute.</h2>
   <p class="section-sub">
-    You do not need to buy servers or install complex software. I connect securely to wherever your data lives, process it on my high-performance system, and give you the final product.
+    You do not install anything. You do not send me files. I connect securely to wherever your data already lives — S3, Azure Blob, GCP, or your own servers — process it remotely, and return only the results.
   </p>
 
-  <div class="pipeline-box"><span class="hl">STEP 1: THE SWAMP (Where you are now)</span>
+  <div class="pipeline-box"><span class="hl">YOUR DATA SOURCES (Wherever they live now)</span>
 
-  ├── Messy Excel Files (.xlsx) on a shared drive
-  ├── Massive, broken CSV exports from your software
-  └── Chaotic JSON logs or cloud storage (AWS/Azure)
+  ├── AWS S3 / Azure Blob / Google Cloud Storage
+  ├── On-prem file servers, NAS, SFTP
+  └── CSV dumps, Parquet files, JSON logs, databases
          │
-         │   (Secure, read-only access granted)
+         │   (Read-only credentials — I see data, never copy it)
          ▼
-<span class="hl">STEP 2: THE PURIFICATION (My Job)</span>
+<span class="hl">SOVEREIGN DATA ENGINE (My compute, your advantage)</span>
 
-  [ Sovereign Data Engine ]
-  · I stream the data securely without taking your systems offline.
-  · I clean the errors, fix the broken dates, and organize the mess.
-  · I calculate your critical business metrics in seconds.
+  [ DuckDB — 172M rows/sec · Intel Ultra 7 · NVMe · 64GB RAM ]
+  · Streams your data directly — nothing lands permanently on disk
+  · Cleans errors, fixes broken dates, calculates your metrics
+  · Optional: post-quantum column encryption for sensitive fields
          │
-         │   (Instant, automated delivery)
+         │   (Results only — delivered to you)
          ▼
-<span class="grn">STEP 3: THE CLARITY (What you get)</span>
+<span class="grn">WHAT YOU RECEIVE</span>
 
-  ├── Clean Daily Reports (Emailed directly to you)
-  ├── White-Labeled Dashboards (Live charts you can view anytime)
-  └── Massive Cost Savings (No enterprise software subscriptions)
-</div>
-</section>
+  ├── Clean daily/weekly reports (emailed or dashboard)
+  ├── Interactive dashboards (Streamlit, live charts)
+  ├── Parquet/CSV exports — clean, organized, ready to use
+  └── 80% lower infrastructure costs starting month one</div>
 
-<section id="services">
-  <div class="section-label">// PACKAGES & PRICING</div>
-  <h2>Fixed scope. No hidden hourly fees.</h2>
-  <p class="section-sub">I don't bill by the hour to figure things out. You pay for delivered business outcomes.</p>
-
-  <div class="services-grid">
-    <div class="service-card" style="border-color:var(--duck);">
-      <h3 style="color:var(--duck);">⚡ The Data Swamp Rescue (Flat Fee)</h3>
-      <p>Got a massive, crashing spreadsheet or a 10-hour data job that keeps failing? Send it to me. I will port it to my high-speed engine, clean it, and run it in seconds. Undeniable, immediate ROI.</p>
+  <div class="sovereign-delivery">
+    <div class="sdl-col">
+      <div class="sdl-title">Your raw data never leaves your infrastructure.</div>
+      <div class="sdl-body">I operate with read-only credentials scoped to exactly the data I need. For cloud storage (S3/Azure/GCP), DuckDB streams directly without downloading. For on-prem, I mount read-only over SSH. Zero permanent copies on my end.</div>
     </div>
-    <div class="service-card">
-      <h3>📈 The Fractional Data Team (Retainer)</h3>
-      <p>Ideal for agencies and growing businesses. I manage your data pipelines continuously. You get automated, live dashboards and clean daily reports without the cost of hiring a full-time engineer.</p>
+    <div class="sdl-col">
+      <div class="sdl-title">No compliance overhead for you.</div>
+      <div class="sdl-body">I target e-commerce, SaaS, logistics, agencies, and manufacturing — not healthcare or payments. Clean data engagements, clean scope, no regulatory complexity. If your data is business data, we can work with it.</div>
     </div>
-    <div class="service-card">
-      <h3>☁️ The Cloud Bill Slasher</h3>
-      <p>Are you paying Snowflake, Databricks, or AWS thousands of dollars a month just to view basic dashboards? Let me audit your setup. I routinely cut data infrastructure bills by 80% using modern, streamlined tools.</p>
-    </div>
-    <div class="service-card">
-      <h3>🏗️ Custom Dashboard Builds</h3>
-      <p>Stop manually copying and pasting numbers. I will build an automated pipeline that connects your raw business data straight into a clean, interactive web dashboard customized for your KPIs.</p>
+    <div class="sdl-col">
+      <div class="sdl-title">Post-quantum security available.</div>
+      <div class="sdl-body">For sensitive columns, I can apply ML-KEM-768 + AES-256-GCM encryption directly in SQL. Encrypted at rest before it touches any pipeline. Only the keyholder decrypts. Future-proof against quantum attacks.</div>
     </div>
   </div>
 </section>
 
+<!-- ── SERVICES & PRICING ── -->
+<section id="services">
+  <div class="section-label">// SERVICES &amp; PRICING</div>
+  <h2>Fixed scope. Delivered results. No hourly billing.</h2>
+  <p class="section-sub">Every engagement is scoped upfront. You know exactly what you're getting and what it costs before we start.</p>
+
+  <div class="services-grid">
+
+    <div class="service-card featured">
+      <span class="service-tag tag-gold">Most Popular</span>
+      <h3>Spark / Databricks → DuckDB Migration</h3>
+      <p>Paying $5k–$20k/mo for a cluster that runs 5 dashboards? I audit your Databricks or Spark workload, identify what can be migrated, and rebuild it in DuckDB. Typical result: 80% cost reduction, 10–25x faster queries, no cluster to manage.</p>
+      <span class="service-price">$3,500 – $7,500 flat</span>
+    </div>
+
+    <div class="service-card featured-purple">
+      <span class="service-tag tag-purple">Unique Capability</span>
+      <h3>Post-Quantum Secured Pipeline</h3>
+      <p>Column-level encryption built directly into SQL using ML-KEM-768 + AES-256-GCM. Sensitive fields are encrypted before they enter any pipeline and can only be decrypted by the keyholder. No other fractional consultant offers this. Future-proof against quantum attacks. Ideal for IP-sensitive data, financial records, and proprietary datasets.</p>
+      <span class="service-price purple">$5,000 – $12,000 flat</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-green">Fast ROI</span>
+      <h3>Cloud Cost Audit + Migration Plan</h3>
+      <p>I review your current Databricks, Snowflake, or Redshift bill line by line. I deliver a written report: what you're actually using, what you're wasting, and the exact migration path to reduce it by 60–80%. No commitment to migrate required.</p>
+      <span class="service-price">$750 flat</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-gold">Retainer</span>
+      <h3>Fractional Data Team</h3>
+      <p>Ongoing data engineering on retainer. I manage your pipelines, maintain your dashboards, and deliver automated reports. You get a senior data engineer without the $150k/yr salary. Minimum 3-month engagement.</p>
+      <span class="service-price">$1,500 – $4,500 / month</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-blue">One-Time</span>
+      <h3>Data Swamp Rescue</h3>
+      <p>Got a massive crashing spreadsheet, a 10-hour ETL job that keeps failing, or a pile of CSV exports nobody can query? Send me the problem. I port it to DuckDB, clean it, and return working results — usually within 48 hours.</p>
+      <span class="service-price">$500 – $2,500 flat</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-blue">One-Time</span>
+      <h3>Custom Dashboard Build</h3>
+      <p>I build an automated pipeline from your raw business data into a live, interactive Streamlit dashboard. Tailored to your KPIs. No more manual copy-pasting into spreadsheets. Delivered and documented.</p>
+      <span class="service-price">$1,500 – $4,000 flat</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-green">One-Time</span>
+      <h3>Bare-Metal Analytics Setup</h3>
+      <p>For companies ready to move off cloud. I spec, configure, and benchmark an optimized DuckDB stack on dedicated hardware (your server or Hetzner dedicated). NVMe-optimized, production-tuned, documented. You own the hardware, I own the setup.</p>
+      <span class="service-price">$2,500 – $5,000 flat</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-purple">Advisory</span>
+      <h3>Data Architecture Review</h3>
+      <p>Half-day or full-day deep-dive into your current data stack. I review your pipelines, query patterns, costs, and bottlenecks. You receive a written report with prioritized recommendations and a roadmap. No work contracted — just clarity.</p>
+      <span class="service-price">$1,500 – $3,000 flat</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── COMPARISON ── -->
 <section id="compare">
   <div class="section-label">// THE OLD WAY VS. THE NEW WAY</div>
   <h2>Why it works so well.</h2>
-  <p class="section-sub">Big tech companies convinced the world you need massive, expensive cloud clusters to look at your data. You don't. You just need highly optimized engineering.</p>
+  <p class="section-sub">Enterprise vendors spent decades convincing you that you need massive distributed clusters to analyze data. You don't. You just need highly optimized single-node engineering.</p>
 
   <table class="compare-table">
     <thead>
       <tr>
         <th>The Need</th>
-        <th>The Old Expensive Way</th>
-        <th>My Approach</th>
+        <th>Enterprise / Cloud Way</th>
+        <th>DuckDB Data Master</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>Process daily business reports</td>
-        <td class="bad">$5,000/mo enterprise cloud cluster</td>
-        <td class="good">Processed on my optimized hardware</td>
+        <td>Process 167M rows of business data</td>
+        <td class="bad">$5,000–$15,000/mo cluster, minutes of runtime</td>
+        <td class="good">971ms. One machine. Done.</td>
       </tr>
       <tr>
-        <td>Time to get results</td>
-        <td class="bad">Weeks of setup and hiring</td>
-        <td class="good">48-hour turnarounds</td>
+        <td>Query speed vs. Spark</td>
+        <td class="bad">6.88M rows/sec (pre-warmed, 50GB heap)</td>
+        <td class="good">172M rows/sec — 25x faster, cold start</td>
       </tr>
       <tr>
-        <td>Data Cleaning</td>
-        <td class="bad">Manual Excel copy/pasting (error prone)</td>
-        <td class="good">100% automated software pipelines</td>
+        <td>Infrastructure overhead</td>
+        <td class="bad">Cluster management, DevOps, version upgrades</td>
+        <td class="good">Zero. I handle everything.</td>
       </tr>
       <tr>
-        <td>Your Software Overhead</td>
-        <td class="bad">Managing licenses and updates</td>
-        <td class="good">Zero. I handle all the tech.</td>
+        <td>Time to first result</td>
+        <td class="bad">Weeks of hiring, setup, and onboarding</td>
+        <td class="good">48-hour turnarounds on first engagement</td>
+      </tr>
+      <tr>
+        <td>Data security model</td>
+        <td class="bad">Data replicated across cloud regions, shared tenancy</td>
+        <td class="good">Read-only access, data never leaves your infra</td>
+      </tr>
+      <tr>
+        <td>Post-quantum encryption</td>
+        <td class="bad">Not offered at any price tier</td>
+        <td class="good">ML-KEM-768 + AES-256-GCM, built into SQL</td>
       </tr>
     </tbody>
   </table>
 </section>
 
+<!-- ── BENCHMARK ── -->
 <section id="proof">
-  <div class="section-label">// THE PROOF</div>
-  <h2>You don't need to know how it works.<br/>You just need to know it's fast.</h2>
+  <div class="section-label">// THE BENCHMARK — VERIFIED 2026-04-08</div>
+  <h2>Not an estimate.<br/>A measured result on real data.</h2>
   <p class="section-sub">
-    For the technical founders: I use DuckDB, an embedded analytical engine that obliterates traditional data processing limits. Here is the raw speed I bring to your business.
+    167 million NYC taxi trips. 4 years of data. 5 business queries. One machine. Under one second.
+    This is the exact performance I bring to your data.
   </p>
 
   <div class="sovereign-box">
     <div style="font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: 1rem;">
-      Benchmark: 4 Years of NYC Taxi Data (167 Million Trips)
+      167,858,646 Rows · 5 Queries · 971ms Total · Cold NVMe Start
     </div>
     <div class="bench-hero-stats">
       <div class="bhs-card gold">
-        <div class="bhs-num">167 Million</div>
-        <div class="bhs-lbl">Rows of data analyzed</div>
+        <div class="bhs-num">172M</div>
+        <div class="bhs-lbl">Rows per second</div>
       </div>
       <div class="bhs-card gold">
         <div class="bhs-num">971 ms</div>
-        <div class="bhs-lbl">Total processing time (Under 1 second)</div>
+        <div class="bhs-lbl">Total wall time (5 queries)</div>
       </div>
       <div class="bhs-card gold">
-        <div class="bhs-num">25x Faster</div>
-        <div class="bhs-lbl">Than standard enterprise clusters</div>
+        <div class="bhs-num">25×</div>
+        <div class="bhs-lbl">Faster than Spark (pre-warmed)</div>
       </div>
     </div>
-    <p style="font-size:0.85rem; color:var(--muted);">
-      *This means if your company generates a few million rows of sales data a year, my systems will clean and report on it almost instantly.
+
+    <table class="query-table">
+      <thead>
+        <tr><th>Query</th><th>Description</th><th>Time</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Q1</td><td>COUNT(*) per year across 4 years</td><td class="t">29ms</td></tr>
+        <tr><td>Q2</td><td>6 aggregates year-over-year, 143M filtered rows</td><td class="t">401ms</td></tr>
+        <tr><td>Q3</td><td>Monthly pivot, 48 cells, native PIVOT clause</td><td class="t">312ms</td></tr>
+        <tr><td>Q4</td><td>Payment type shift analysis 2022→2025</td><td class="t">158ms</td></tr>
+        <tr><td>Q5</td><td>CBD congestion fee extraction, 2025 column only</td><td class="t">64ms</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:0.82rem; color:var(--muted); margin-top: 1rem;">
+      Hardware: Intel Ultra 7 265KF (20-core) · NVMe SSD · 64GB RAM · Arch Linux · DuckDB 1.4.4
+      · Compared against Spark 3.x with 50GB heap pre-warmed (6.88M rows/sec).
+      Your company's annual sales data is likely 1–10M rows. That processes in under 10ms.
     </p>
   </div>
-  
+
   <div id="chart-monthly" style="width:100%;height:380px;margin-bottom:1rem;"></div>
   <p style="font-size:0.8rem;color:var(--muted);text-align:center;">
-    Interactive Example: 167 million taxi rides processed and charted locally in under a second.
+    167 million taxi trips processed and charted locally in under a second. Interactive — click to filter by year.
   </p>
 </section>
 
+<!-- ── ABOUT ── -->
 <section id="architect">
   <div class="section-label">// THE ARCHITECT</div>
-  <h2>Enterprise security discipline.<br/>Applied to your business.</h2>
+  <h2>Enterprise discipline.<br/>Fractional price.</h2>
   <p class="section-sub">
-    When you hand over your proprietary business data, you need absolute certainty it is safe. Before shifting to fractional consulting, I spent a decade securing data systems for heavily regulated enterprise environments.
+    12+ years building, securing, and rescuing data systems for enterprise environments before moving to fractional consulting. I bring the same rigor to your stack without the enterprise price tag.
   </p>
 
   <div class="trust-box">
     <div class="target-box" style="background: transparent; border: none; padding: 0; margin: 0;">
       <div class="target-col">
-        <h3 style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">🔒 Security & Compliance Veteran</h3>
-        <p style="font-size: 0.9rem; color: var(--muted);">Former Security Engineer with deep experience architecting systems for HIPAA and HITRUST compliance. Your data is handled with military-grade precision and unshakeable privacy protocols.</p>
+        <h3 style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Security & Architecture Veteran</h3>
+        <p style="font-size: 0.9rem; color: var(--muted);">Former Security Engineer with deep experience building systems for enterprise compliance environments. Your data is handled with operational precision — read-only access, zero permanent copies, transparent scope.</p>
       </div>
       <div class="target-col">
-        <h3 style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">⚙️ 12+ Years IT Architecture</h3>
-        <p style="font-size: 0.9rem; color: var(--muted);">I have built, broken, and rescued complex systems across AWS, Azure, and GCP. I don't just write queries; I design resilient, cost-effective digital infrastructure.</p>
+        <h3 style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Certified Across the Stack</h3>
+        <p style="font-size: 0.9rem; color: var(--muted);">Databricks Certified Associate Developer (Apache Spark, Scala) and AWS Solutions Architect Associate. I have built production data systems on AWS, Azure, and GCP — I know the stacks I'm replacing.</p>
       </div>
       <div class="target-col">
-        <h3 style="color: var(--duck); font-size: 1.1rem; margin-bottom: 0.5rem;">📄 The Full Resume</h3>
-        <p style="font-size: 0.9rem; color: var(--muted);">Want to see the exact certifications, roles, and enterprise systems I have engineered over the last decade?</p>
-        <a href="resume.html" class="btn-secondary" style="display: inline-block; margin-top: 0.8rem; padding: 0.6rem 1.2rem; font-size: 0.85rem;">View Full Resume →</a>
+        <h3 style="color: var(--duck); font-size: 1.1rem; margin-bottom: 0.5rem;">Full Resume</h3>
+        <p style="font-size: 0.9rem; color: var(--muted);">Certifications, enterprise roles, and the full technical background behind the benchmark.</p>
+        <a href="resume.html" class="btn-secondary" style="display: inline-block; margin-top: 0.8rem; padding: 0.6rem 1.2rem; font-size: 0.85rem;">View Resume →</a>
       </div>
     </div>
   </div>
 </section>
 
-<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
-<script>
-const DUCK = '#ffcc00'; const MUTED = '#8b949e'; const SURFACE = '#161b22'; const GREEN = '#3fb950'; const BLUE = '#58a6ff';
-const layout_base = {
-  paper_bgcolor: SURFACE, plot_bgcolor: SURFACE,
-  font: { color: '#e6edf3', family: '-apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif', size: 12 },
-  margin: { t: 40, r: 20, b: 50, l: 60 },
-  xaxis: { gridcolor: '#30363d', zerolinecolor: '#30363d' }, yaxis: { gridcolor: '#30363d', zerolinecolor: '#30363d' },
-  legend: { bgcolor: 'rgba(0,0,0,0)', bordercolor: '#30363d' }
-};
-const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-Plotly.newPlot('chart-monthly', [
-  { x:months, y:[2463959,2979420,3627888,3599903,3588292,3557692,3174363,3152695,3183784,3675812,3252670,3399620],
-    name:'2022', mode:'lines+markers', line:{color:MUTED,width:2}, marker:{size:5} },
-  { x:months, y:[3066759,2914003,3403660,3288248,3513664,3307259,2907093,2824201,2846741,3522280,3339732,3376586],
-    name:'2023', mode:'lines+markers', line:{color:BLUE,width:2}, marker:{size:5} },
-  { x:months, y:[2964637,3007534,3582613,3514295,3723843,3539172,3076876,2979192,3633025,3833780,3646372,3668381],
-    name:'2024', mode:'lines+markers', line:{color:GREEN,width:2}, marker:{size:5} },
-  { x:months, y:[3475240,3577542,4145229,3970568,4591844,4322949,3898971,3574080,4251019,4428708,4181432,4305020],
-    name:'2025', mode:'lines+markers', line:{color:DUCK,width:2.5}, marker:{size:6} }
-], Object.assign({}, layout_base, {
-  title: { text: 'Monthly Trip Volume — Live Interactive Chart', font:{ color:'#e6edf3', size:14 } },
-  yaxis: Object.assign({}, layout_base.yaxis, { title:'Trips' })
-}), { responsive: true, displayModeBar: false });
-</script>
-
+<!-- ── CONTACT ── -->
 <section id="contact">
   <div class="contact-box">
     <div class="section-label" style="text-align:center;">// LET'S TALK</div>
-    <h2>Ready to clear the data swamp?</h2>
-    <p>All engagements start with a free, no-obligation scoping call.<br />
-       I respond to all serious inquiries within 24 hours.</p>
+    <h2>Free 30-minute data audit.</h2>
+    <p>Tell me what your data stack looks like and what it costs.<br />
+       I'll tell you honestly whether I can cut that bill and how fast.<br />
+       No obligation. I respond within 24 hours.</p>
     <a href="mailto:scott@duckdatamaster.guru" class="contact-email">
-      Email: scott@duckdatamaster.guru
+      scott@duckdatamaster.guru
     </a>
   </div>
 </section>
 
 <footer>
-  © 2026 Scott Baker · Based in Phoenix, AZ · Fractional Data Architecture
+  © 2026 Scott Baker · Phoenix, AZ · DuckDB Data Master · Fractional Data Engineering
 </footer>
+
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+<script>
+const DUCK='#ffcc00',MUTED='#8b949e',SURFACE='#161b22',GREEN='#3fb950',BLUE='#58a6ff';
+const layout_base={
+  paper_bgcolor:SURFACE,plot_bgcolor:SURFACE,
+  font:{color:'#e6edf3',family:'-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif',size:12},
+  margin:{t:40,r:20,b:50,l:60},
+  xaxis:{gridcolor:'#30363d',zerolinecolor:'#30363d'},
+  yaxis:{gridcolor:'#30363d',zerolinecolor:'#30363d'},
+  legend:{bgcolor:'rgba(0,0,0,0)',bordercolor:'#30363d'}
+};
+const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+Plotly.newPlot('chart-monthly',[
+  {x:months,y:[2463959,2979420,3627888,3599903,3588292,3557692,3174363,3152695,3183784,3675812,3252670,3399620],
+   name:'2022',mode:'lines+markers',line:{color:MUTED,width:2},marker:{size:5}},
+  {x:months,y:[3066759,2914003,3403660,3288248,3513664,3307259,2907093,2824201,2846741,3522280,3339732,3376586],
+   name:'2023',mode:'lines+markers',line:{color:BLUE,width:2},marker:{size:5}},
+  {x:months,y:[2964637,3007534,3582613,3514295,3723843,3539172,3076876,2979192,3633025,3833780,3646372,3668381],
+   name:'2024',mode:'lines+markers',line:{color:GREEN,width:2},marker:{size:5}},
+  {x:months,y:[3475240,3577542,4145229,3970568,4591844,4322949,3898971,3574080,4251019,4428708,4181432,4305020],
+   name:'2025',mode:'lines+markers',line:{color:DUCK,width:2.5},marker:{size:6}}
+],Object.assign({},layout_base,{
+  title:{text:'Monthly NYC Taxi Trip Volume — 167M Rows Processed in 971ms',font:{color:'#e6edf3',size:14}},
+  yaxis:Object.assign({},layout_base.yaxis,{title:'Trips'})
+}),{responsive:true,displayModeBar:false});
+</script>
 
 </body>
 </html>
