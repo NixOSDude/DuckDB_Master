@@ -1,0 +1,39 @@
+data/
+__pycache__/
+*.pyc
+.streamlit/
+*.egg-info/
+dist/
+build/
+.env
+
+# Scala pipeline — local only
+scala/
+scala/target/
+scala/.bsp/
+scala/.metals/
+scala/.idea/
+
+# All scripts — local only
+scripts/
+
+# All notebooks — local only
+notebooks/
+
+# Nix shell — local only
+shell.nix
+
+# PQC signing suite — local only (binaries + keys)
+pqc/pqc_keygen
+pqc/pqc_sign
+pqc/pqc_verify
+pqc/duckpqc.pub
+
+# Sovereign internal — local only
+.gitignore
+CLAUDE.md
+MILESTONES.md
+SESSION_STATE.md
+CONSULTING_PLAN.md
+CONSULTING_COPY.md
+docs/*.md
