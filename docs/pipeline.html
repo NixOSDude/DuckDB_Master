@@ -514,42 +514,49 @@
     <div class="card">
       <h3>LLM</h3>
       <div class="big-num purple" style="font-size:1.4rem">Mistral NeMo</div>
-      <div class="big-sub">12B · 128k context · local · $0 API fees</div>
+      <div class="big-sub">12B · llama.cpp · local · $0 API fees</div>
     </div>
   </div>
 
   <div class="rag-demo">
     <div class="rag-qa">
       <div class="rag-q">
-        <div class="rag-q-label">Query</div>
-        Which customers have contracts with auto-renewal clauses AND overdue invoices?
+        <div class="rag-q-label">Query <span style="float:right;font-size:0.75rem;color:var(--muted);font-weight:400">5,893ms · RTX 3060</span></div>
+        List all contracts where the governing law is Delaware. For each, state the client name, liability cap amount, and filename.
       </div>
       <div class="rag-a">
         <div class="rag-a-label">Answer — Mistral NeMo 12B (local · 0 API fees)</div>
-        <p>Based on the anomaly report and contract documents indexed, 14 enterprise customers have active auto-renewal clauses in their Master Services Agreements and also appear in the overdue invoice table. The largest exposure belongs to accounts with Delaware jurisdiction contracts and NET-60 payment terms. Cross-referencing the invoice aging data, total overdue balance for auto-renewal accounts is approximately $8.2M. Recommend immediate account manager outreach before renewal date to avoid churn with outstanding balance.</p>
-        <div class="rag-cite">Sources: <span>analysis_report.md</span><span>anomaly_report.md</span><span>contract_a3f2b1c4.txt</span><span>contract_8d91e2f7.txt</span></div>
+        <p>Based on the provided contracts, there is one contract where the governing law is Delaware:</p>
+        <p><strong>Client:</strong> Ironside Solutions &nbsp;|&nbsp; <strong>Liability Cap:</strong> $300,000 &nbsp;|&nbsp; <strong>File:</strong> contract_0041f5d4_20240831.txt</p>
+        <div class="rag-cite">Sources: <span>contract_0041f5d4_20240831.txt</span><span>contract_00d8c046_20231227.txt</span><span>contract_0131771e_20240417.txt</span><span>+3 contracts</span></div>
       </div>
     </div>
     <div class="rag-qa">
       <div class="rag-q">
-        <div class="rag-q-label">Query</div>
-        What does our enterprise plan revenue trend look like for 2024 and which contracts have liability caps under $500k?
+        <div class="rag-q-label">Query <span style="float:right;font-size:0.75rem;color:var(--muted);font-weight:400">2,426ms · RTX 3060</span></div>
+        Which contracts contain ITAR compliance clauses or HIPAA data handling requirements? List the client name, compliance type, and filename for each.
       </div>
       <div class="rag-a">
         <div class="rag-a-label">Answer — Mistral NeMo 12B (local · 0 API fees)</div>
-        <p>Enterprise plan revenue grew consistently through 2024 with peak months in Q2 and Q4, consistent with typical SaaS renewal patterns. The anomaly report flags 7,568 high-value transactions worth reviewing. Regarding liability caps: 23 contracts in the indexed set specify caps below $500,000 — primarily shorter-term agreements and pilot programs. Contracts with caps of $50,000–$250,000 represent elevated risk exposure given the transaction values in the anomaly report. Delaware and California jurisdictions are most represented in the low-cap cohort.</p>
-        <div class="rag-cite">Sources: <span>analysis_report.md</span><span>data_summary.md</span><span>contract_f7a3d2e1.txt</span><span>+19 contracts</span></div>
+        <p>Two contracts contain compliance clauses:</p>
+        <p><strong>Ironside Solutions</strong> — HIPAA data handling requirements &nbsp;|&nbsp; contract_0041f5d4_20240831.txt</p>
+        <p><strong>Radiant Analytics</strong> — HIPAA data handling requirements &nbsp;|&nbsp; contract_037146f7_20220504.txt</p>
+        <div class="rag-cite">Sources: <span>contract_0041f5d4_20240831.txt</span><span>contract_037146f7_20220504.txt</span><span>+4 contracts</span></div>
       </div>
     </div>
     <div class="rag-qa">
       <div class="rag-q">
-        <div class="rag-q-label">Query</div>
-        Summarize the data quality problems we fixed and what that means for the revenue numbers.
+        <div class="rag-q-label">Query <span style="float:right;font-size:0.75rem;color:var(--muted);font-weight:400">14,258ms · RTX 3060</span></div>
+        Which contracts auto-renew automatically without requiring a new signed SOW? Flag any that could create unexpected billing obligations.
       </div>
       <div class="rag-a">
         <div class="rag-a-label">Answer — Mistral NeMo 12B (local · 0 API fees)</div>
-        <p>The pipeline removed 109,726 dirty rows across three tables — primarily duplicate invoice numbers (22.4% duplication rate), transaction re-submissions, and customers with unresolvable plan data. Before cleaning, date columns had 30–32% format inconsistency across five formats from three source systems. Amount columns had 12–18% non-numeric formatting. After cleaning, all fields are typed, normalized, and deduped. The revenue figure reflects only verified, non-duplicated, properly-typed transactions. Any revenue analysis run against the raw data would have been materially overstated due to the duplicate transactions.</p>
-        <div class="rag-cite">Sources: <span>analysis_report.md</span><span>anomaly_report.md</span><span>data_summary.md</span></div>
+        <p>Three contracts carry automatic renewal risk:</p>
+        <p>⚠ <strong>Forge Technologies</strong> — auto-renews for successive 12-month terms unless 90 days written notice given &nbsp;|&nbsp; contract_0131771e_20240417.txt</p>
+        <p>⚠ <strong>Yield Ventures</strong> — auto-renews for successive 12-month terms unless 60 days written notice given &nbsp;|&nbsp; contract_01e6ee9a_20220103.txt</p>
+        <p>⚠ <strong>Radiant Analytics</strong> — auto-renews for successive 12-month terms unless 30 days written notice given &nbsp;|&nbsp; contract_037146f7_20220504.txt</p>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">Ironside Solutions and Quantum Innovations do not auto-renew. Renewal requires a new signed SOW.</p>
+        <div class="rag-cite">Sources: <span>contract_0131771e_20240417.txt</span><span>contract_01e6ee9a_20220103.txt</span><span>contract_037146f7_20220504.txt</span><span>+3 contracts</span></div>
       </div>
     </div>
   </div>
