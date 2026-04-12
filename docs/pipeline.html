@@ -521,42 +521,41 @@
   <div class="rag-demo">
     <div class="rag-qa">
       <div class="rag-q">
-        <div class="rag-q-label">Query <span style="float:right;font-size:0.75rem;color:var(--muted);font-weight:400">5,893ms · RTX 3060</span></div>
+        <div class="rag-q-label">Query <span style="float:right;font-size:0.75rem;color:var(--muted);font-weight:400">6,425ms · RTX 3060 · 50 contracts searched</span></div>
         List all contracts where the governing law is Delaware. For each, state the client name, liability cap amount, and filename.
       </div>
       <div class="rag-a">
         <div class="rag-a-label">Answer — Mistral NeMo 12B (local · 0 API fees)</div>
         <p>Based on the provided contracts, there is one contract where the governing law is Delaware:</p>
         <p><strong>Client:</strong> Ironside Solutions &nbsp;|&nbsp; <strong>Liability Cap:</strong> $300,000 &nbsp;|&nbsp; <strong>File:</strong> contract_0041f5d4_20240831.txt</p>
-        <div class="rag-cite">Sources: <span>contract_0041f5d4_20240831.txt</span><span>contract_00d8c046_20231227.txt</span><span>contract_0131771e_20240417.txt</span><span>+3 contracts</span></div>
+        <div class="rag-cite">Sources: <span>contract_0041f5d4_20240831.txt</span><span>contract_00d8c046_20231227.txt</span><span>contract_0131771e_20240417.txt</span><span>+4 contracts</span></div>
       </div>
     </div>
     <div class="rag-qa">
       <div class="rag-q">
-        <div class="rag-q-label">Query <span style="float:right;font-size:0.75rem;color:var(--muted);font-weight:400">2,426ms · RTX 3060</span></div>
+        <div class="rag-q-label">Query <span style="float:right;font-size:0.75rem;color:var(--muted);font-weight:400">3,725ms · RTX 3060 · 50 contracts searched</span></div>
         Which contracts contain ITAR compliance clauses or HIPAA data handling requirements? List the client name, compliance type, and filename for each.
       </div>
       <div class="rag-a">
         <div class="rag-a-label">Answer — Mistral NeMo 12B (local · 0 API fees)</div>
-        <p>Two contracts contain compliance clauses:</p>
-        <p><strong>Ironside Solutions</strong> — HIPAA data handling requirements &nbsp;|&nbsp; contract_0041f5d4_20240831.txt</p>
-        <p><strong>Radiant Analytics</strong> — HIPAA data handling requirements &nbsp;|&nbsp; contract_037146f7_20220504.txt</p>
-        <div class="rag-cite">Sources: <span>contract_0041f5d4_20240831.txt</span><span>contract_037146f7_20220504.txt</span><span>+4 contracts</span></div>
+        <p>Two contracts contain HIPAA compliance clauses:</p>
+        <p><strong>Ironside Solutions</strong> — HIPAA: <em>"This engagement is structured to support HIPAA data handling requirements. All processing occurs on dedicated infrastructure."</em> &nbsp;|&nbsp; contract_0041f5d4_20240831.txt</p>
+        <p><strong>Radiant Analytics</strong> — HIPAA: <em>"This engagement is structured to support HIPAA data handling requirements. All processing occurs on dedicated infrastructure."</em> &nbsp;|&nbsp; contract_037146f7_20220504.txt</p>
+        <div class="rag-cite">Sources: <span>contract_0041f5d4_20240831.txt</span><span>contract_037146f7_20220504.txt</span><span>+5 contracts</span></div>
       </div>
     </div>
     <div class="rag-qa">
       <div class="rag-q">
-        <div class="rag-q-label">Query <span style="float:right;font-size:0.75rem;color:var(--muted);font-weight:400">14,258ms · RTX 3060</span></div>
+        <div class="rag-q-label">Query <span style="float:right;font-size:0.75rem;color:var(--muted);font-weight:400">10,704ms · RTX 3060 · 50 contracts searched</span></div>
         Which contracts auto-renew automatically without requiring a new signed SOW? Flag any that could create unexpected billing obligations.
       </div>
       <div class="rag-a">
         <div class="rag-a-label">Answer — Mistral NeMo 12B (local · 0 API fees)</div>
-        <p>Three contracts carry automatic renewal risk:</p>
-        <p>⚠ <strong>Forge Technologies</strong> — auto-renews for successive 12-month terms unless 90 days written notice given &nbsp;|&nbsp; contract_0131771e_20240417.txt</p>
-        <p>⚠ <strong>Yield Ventures</strong> — auto-renews for successive 12-month terms unless 60 days written notice given &nbsp;|&nbsp; contract_01e6ee9a_20220103.txt</p>
-        <p>⚠ <strong>Radiant Analytics</strong> — auto-renews for successive 12-month terms unless 30 days written notice given &nbsp;|&nbsp; contract_037146f7_20220504.txt</p>
-        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.5rem">Ironside Solutions and Quantum Innovations do not auto-renew. Renewal requires a new signed SOW.</p>
-        <div class="rag-cite">Sources: <span>contract_0131771e_20240417.txt</span><span>contract_01e6ee9a_20220103.txt</span><span>contract_037146f7_20220504.txt</span><span>+3 contracts</span></div>
+        <p>⚠ <strong>Ironside Solutions</strong> — auto-renews, 90 days notice required &nbsp;|&nbsp; contract_0131771e_20240417.txt &nbsp;|&nbsp; <span style="color:var(--red)">Billing risk</span></p>
+        <p>⚠ <strong>Yield Ventures</strong> — auto-renews, 60 days notice required &nbsp;|&nbsp; contract_01e6ee9a_20220103.txt &nbsp;|&nbsp; <span style="color:var(--red)">Billing risk</span></p>
+        <p>⚠ <strong>Radiant Analytics</strong> — auto-renews, 30 days notice required &nbsp;|&nbsp; contract_037146f7_20220504.txt &nbsp;|&nbsp; <span style="color:var(--red)">Billing risk</span></p>
+        <p style="color:var(--muted);font-size:0.85rem;margin-top:0.6rem">No billing risk: Ironside Solutions (contract_00d8c046), Quantum Innovations (contract_037f5347), Prism Consulting (contract_03908f5a) — renewal requires new signed SOW.</p>
+        <div class="rag-cite">Sources: <span>contract_0131771e_20240417.txt</span><span>contract_01e6ee9a_20220103.txt</span><span>contract_037146f7_20220504.txt</span><span>+4 contracts</span></div>
       </div>
     </div>
   </div>
