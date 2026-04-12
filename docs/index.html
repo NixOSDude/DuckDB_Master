@@ -200,6 +200,7 @@
     .tag-purple  { background: #150a2a; color: var(--purple); border: 1px solid #2a1545; }
     .tag-green   { background: #0d1f0d; color: var(--green); border: 1px solid #1a3a1a; }
     .tag-blue    { background: #0a1628; color: var(--blue); border: 1px solid #0e2040; }
+    .tag-red     { background: #2d1a1a; color: var(--red);  border: 1px solid #5a2020; }
 
     /* ── COMPARISON TABLE ── */
     .compare-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; margin-top: 1rem; }
@@ -302,6 +303,7 @@
   <div class="nav-links">
     <a href="#how">How It Works</a>
     <a href="#engine">Capabilities</a>
+    <a href="#verticals">Who We Serve</a>
     <a href="#services">Services &amp; Pricing</a>
     <a href="#rag" style="color: var(--purple);">AI Docs ↗</a>
     <a href="#proof">Benchmark</a>
@@ -584,6 +586,68 @@
       </tr>
     </tbody>
   </table>
+</section>
+
+<!-- ── WHO WE SERVE ── -->
+<section id="verticals">
+  <div class="section-label">// WHO WE SERVE</div>
+  <h2>Built for the markets IBM and OpenAI <span>overcharge.</span></h2>
+  <p class="section-sub">Enterprise vendors sell Fortune 500 solutions to mid-market companies at Fortune 500 prices. We undercut them on cost, beat them on speed, and exceed them on data privacy.</p>
+
+  <div class="services-grid">
+
+    <div class="service-card featured-purple">
+      <span class="service-tag tag-purple">Legal Tech</span>
+      <h3>Law Firms &amp; Legal Ops</h3>
+      <p>Relativity costs $50k–$200k/yr. Kira Systems and Luminance aren't cheaper. We built a private AI that answers <em>"find all Delaware contracts with liability caps under $500k"</em> across 50,000 documents in under 10 seconds — on your infrastructure, under attorney-client privilege, zero data sent to OpenAI.</p>
+      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Privileged documents never leave your server. No shared tenancy. No OpenAI. Cryptographic chain of custody on every output.</p>
+      <span class="service-price purple">$6,000–$9,000 setup · $1,500–$2,500/mo</span>
+    </div>
+
+    <div class="service-card featured-purple">
+      <span class="service-tag tag-red" style="background:#2d1a1a;color:var(--red);border-color:var(--red)">ITAR / Defense</span>
+      <h3>Government Contractors</h3>
+      <p>Your organization legally <strong style="color:var(--text)">cannot</strong> send ITAR-controlled or CUI documents to OpenAI, Azure OpenAI, or any multi-tenant cloud AI service. We are sovereign by architecture: local compute, zero egress, ML-DSA-65 post-quantum signed outputs (NIST FIPS 204) on every deliverable.</p>
+      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Ask any competitor: can they prove your controlled documents never left their shared cloud? We can. Cryptographically. With a tamper-evident audit log.</p>
+      <span class="service-price" style="color:var(--red)">$10,000–$15,000 setup · $2,000–$3,500/mo</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-green">Healthcare</span>
+      <h3>Clinical &amp; Health Analytics</h3>
+      <p>PHI cannot touch OpenAI's shared infrastructure. We process clinical documents, EHR exports, and research corpora on dedicated compute — HIPAA-compatible by design. DuckDB handles your claims data 10x faster than Databricks at a fraction of the cost.</p>
+      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Zero PHI egress. Dedicated GCP instance in your account. Signed audit log on every query output.</p>
+      <span class="service-price">$6,000–$9,000 setup · $1,200–$2,000/mo</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-gold">Finance &amp; Accounting</span>
+      <h3>Tax Firms &amp; Financial Services</h3>
+      <p>Your team spends partner billing hours searching financial statements, workpapers, and prior filings manually. We turn those into 10-second queries across your entire document vault. Every answer is ML-DSA-65 signed — defensible in an audit or court proceeding.</p>
+      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Client financial data stays on your infrastructure. No SaaS subscription. No per-user fees. You own the system.</p>
+      <span class="service-price">$4,500–$7,500 setup · $1,200–$2,000/mo</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-blue">Series A / B Startups</span>
+      <h3>Cash-Burn Companies</h3>
+      <p>If your Databricks or Snowflake bill exceeds $5k/month and your queries touch under a billion rows, you are almost certainly overpaying by 5–10x. We migrate your workload to DuckDB. Typical result: 80% cost reduction, 25x faster queries, no cluster to manage. Migration pays for itself in the first month.</p>
+      <span class="service-price">$3,500–$7,500 flat migration</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-green">Agencies</span>
+      <h3>Digital Marketing Agencies</h3>
+      <p>You're paying $2k–$5k/mo for Supermetrics or Funnel.io to power dashboards you resell to clients. We build you a white-labeled DuckDB + Streamlit stack you own forever. Resell it to clients at whatever margin you want. No subscription. No per-seat fees.</p>
+      <span class="service-price">$2,500–$5,000 flat · you own it</span>
+    </div>
+
+  </div>
+
+  <div style="text-align:center;margin-top:2rem;">
+    <a href="pipeline.html" class="btn-secondary" style="margin-right:1rem;">See the Live Pipeline Demo →</a>
+    <a href="mailto:scott@duckdatamaster.guru" class="btn-primary">Book a Free 30-Min Audit</a>
+  </div>
 </section>
 
 <!-- ── BENCHMARK ── -->
