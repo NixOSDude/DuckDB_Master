@@ -303,6 +303,7 @@
     <a href="#how">How It Works</a>
     <a href="#engine">Capabilities</a>
     <a href="#services">Services &amp; Pricing</a>
+    <a href="#rag" style="color: var(--purple);">AI Docs ↗</a>
     <a href="#proof">Benchmark</a>
     <a href="#architect">About</a>
     <a href="resume.html" style="color: var(--duck);">Resume</a>
@@ -338,6 +339,10 @@
     <div class="target-col">
       <h3 class="target-title" style="color: var(--green);">3. Digital Agencies & E-Commerce</h3>
       <p style="font-size: 0.9rem; color: var(--text);">You sell results but the backend data is a mess. I process client data behind the scenes, deliver fully white-labeled dashboards you can resell. Clickstreams, ad data, transaction data — all of it.</p>
+    </div>
+    <div class="target-col">
+      <h3 class="target-title" style="color: var(--purple);">4. Defense, Legal & Finance</h3>
+      <p style="font-size: 0.9rem; color: var(--text);">ITAR-sensitive, attorney-client privileged, or under SEC/FINRA scrutiny? Data cannot go to OpenAI. I deploy sovereign AI on a dedicated GCP A100 — your documents stay in your own cloud account, encrypted at rest with post-quantum standards, and never touch shared infrastructure.</p>
     </div>
   </div>
 </div>
@@ -386,6 +391,21 @@
     <div class="sdl-col">
       <div class="sdl-title">Post-quantum security available.</div>
       <div class="sdl-body">For sensitive columns, I can apply ML-KEM-768 + AES-256-GCM encryption directly in SQL. Encrypted at rest before it touches any pipeline. Only the keyholder decrypts. Future-proof against quantum attacks.</div>
+    </div>
+  </div>
+
+  <div class="sovereign-delivery" style="border-color: var(--purple); background: #0d0812; margin-top: 1rem;">
+    <div class="sdl-col">
+      <div class="sdl-title" style="color: var(--purple);">Need AI over your documents? No GPU required.</div>
+      <div class="sdl-body">The AI Document Intelligence service runs on a dedicated GCP A100 compute instance I manage for you. You supply a GCP account — I deploy the stack, move your documents to a private GCS bucket, and hand you a browser interface to query your corpus. The A100 stays in your GCP project. I never have root access to your data after handoff.</div>
+    </div>
+    <div class="sdl-col">
+      <div class="sdl-title" style="color: var(--purple);">Your documents in, answers out.</div>
+      <div class="sdl-body">Contracts, research reports, internal wikis, code, manuals — ingested, chunked, and embedded into an encrypted vector store on the A100's NVMe. Ask in plain English. Get answers with citations to the exact source document. No hallucination risk from a general internet-trained model making up facts about your specific data.</div>
+    </div>
+    <div class="sdl-col">
+      <div class="sdl-title" style="color: var(--purple);">Sovereign by design.</div>
+      <div class="sdl-body">The LLM runs locally on the A100 — no API calls to OpenAI, Anthropic, or anyone else. Your documents are encrypted at rest with ML-KEM-768 before they touch the GCS bucket. The vector index is encrypted. The audit log is ML-DSA-65 signed — tamper-evident chain of custody for every query. Defensible in court. ITAR-compatible by architecture.</div>
     </div>
   </div>
 </section>
@@ -455,6 +475,15 @@
       <h3>Post-Quantum Secured Pipeline</h3>
       <p>Three capabilities no other fractional engineer offers: <strong style="color:var(--text);">column-level encryption</strong> — sensitive fields encrypted individually in SQL, rest of the table fully queryable, only the keyholder reads the plaintext; <strong style="color:var(--text);">signed data deliveries</strong> — every report cryptographically authenticated so you can prove it came from me unmodified; <strong style="color:var(--text);">quantum-resistant standards</strong> — ML-KEM-768 + AES-256-GCM, NIST-finalized 2024, safe when quantum computers arrive. Ideal for proprietary data, IP-sensitive pipelines, and clients who need chain of custody.</p>
       <span class="service-price purple">$5,000 – $12,000 flat</span>
+    </div>
+
+    <div class="service-card featured-purple" id="rag">
+      <span class="service-tag tag-purple">New · AI-Powered</span>
+      <h3>AI Document Intelligence — RAG on Your Data</h3>
+      <p>Ask plain-English questions of your own documents — contracts, reports, manuals, code, internal wikis — and get grounded, cited answers from a private AI that never sends your data to OpenAI. Built on a sovereign Rust RAG engine with ML-KEM-768 encrypted document vault.<br/><br/>
+      <strong style="color:var(--text);">You do not need GPU hardware.</strong> I deploy a dedicated GCP A100 compute instance for you. Your documents move to a private GCS bucket and the NVMe on the A100. You get a browser-based WASM interface to chat with your data. No ChatGPT. No third-party model. No shared tenancy. Your documents stay in your GCP account.<br/><br/>
+      Ideal for legal (contract review), defense/gov contractors (ITAR-sensitive docs), financial services (research corpus), and any company with proprietary knowledge that cannot leave the building.</p>
+      <span class="service-price purple">$4,500 setup · $800–$2,000 / mo (A100 hosting)</span>
     </div>
 
     <div class="service-card">
@@ -546,6 +575,11 @@
         <td>Post-quantum encryption</td>
         <td class="bad">Not offered at any price tier</td>
         <td class="good">ML-KEM-768 + AES-256-GCM, built into SQL</td>
+      </tr>
+      <tr>
+        <td>AI Q&amp;A over your private documents</td>
+        <td class="bad">Send data to OpenAI/Anthropic — shared cloud, no data isolation</td>
+        <td class="good">Sovereign RAG on dedicated GCP A100 — your GCP account, your data, no third-party model</td>
       </tr>
     </tbody>
   </table>
