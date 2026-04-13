@@ -310,6 +310,8 @@
     <a href="#architect">About</a>
     <a href="pipeline.html" style="color: var(--green);">Pipeline Demo</a>
     <a href="resume.html" style="color: var(--duck);">Resume</a>
+    <a href="#pqc-pubkey" style="color: var(--purple);">Public Key</a>
+    <a href="https://rusticagentic.agency" target="_blank" style="color: var(--purple);">RusticAgentic ↗</a>
     <a href="#contact">Contact</a>
   </div>
 </nav>
@@ -454,6 +456,23 @@
     <div class="sdl-col">
       <div class="sdl-title" style="color: var(--purple);">Future-Proof Against Quantum Attacks</div>
       <div class="sdl-body">RSA and ECC encryption — what protects most data today — will be broken by quantum computers. NIST finalized the post-quantum standards in 2024. My encryption stack uses those standards now. Data encrypted today stays safe when quantum arrives.</div>
+    </div>
+  </div>
+
+  <!-- PQC PUBLIC KEY -->
+  <div id="pqc-pubkey" style="margin-top:40px;background:#161b22;border:1px solid #30363d;border-left:3px solid var(--purple);border-radius:0 8px 8px 0;padding:24px 28px;">
+    <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.12em;color:var(--purple);font-weight:700;margin-bottom:10px;">ML-DSA-65 Public Key — NIST FIPS 204</div>
+    <p style="font-size:0.9rem;color:var(--text);margin-bottom:6px;">
+      Every report and dataset I deliver is post-quantum signed with <strong>ML-DSA-65</strong> (NIST FIPS 204).
+      Download my public key to independently verify that any deliverable came from me unmodified.
+      Safe to share, distribute, and archive — the public key cannot be used to forge signatures.
+    </p>
+    <p style="font-size:0.82rem;color:var(--muted);margin-bottom:16px;">
+      Verification is independent — opposing counsel, auditors, or your own team can confirm authenticity without contacting me.
+    </p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="scottbaker-mldsa65.pub.pem" download style="font-size:0.85rem;color:var(--purple);border:1px solid #30363d;padding:7px 16px;border-radius:4px;text-decoration:none;background:#0d1117;font-weight:600;">↓ Public Key (.pem)</a>
+      <a href="scottbaker-mldsa65.pub.hex" download style="font-size:0.85rem;color:var(--muted);border:1px solid #30363d;padding:7px 16px;border-radius:4px;text-decoration:none;background:#0d1117;">↓ Public Key (.hex)</a>
     </div>
   </div>
 </section>
@@ -646,7 +665,7 @@
 
   <div style="text-align:center;margin-top:2rem;">
     <a href="pipeline.html" class="btn-secondary" style="margin-right:1rem;">See the Live Pipeline Demo →</a>
-    <a href="mailto:scott@duckdatamaster.guru" class="btn-primary">Book a Free 30-Min Audit</a>
+    <a href="mailto:scott@rusticagentic.agency" class="btn-primary">Book a Free 30-Min Audit</a>
   </div>
 </section>
 
@@ -738,14 +757,15 @@
     <p>Tell me what your data stack looks like and what it costs.<br />
        I'll tell you honestly whether I can cut that bill and how fast.<br />
        No obligation. I respond within 24 hours.</p>
-    <a href="mailto:scott@duckdatamaster.guru" class="contact-email">
-      scott@duckdatamaster.guru
+    <a href="mailto:scott@rusticagentic.agency" class="contact-email">
+      scott@rusticagentic.agency
     </a>
   </div>
 </section>
 
 <footer>
   © 2026 Scott Baker · Phoenix, AZ · DuckDB Data Master · Fractional Data Engineering
+  &nbsp;·&nbsp; <a href="https://rusticagentic.agency" target="_blank" style="color:var(--purple);text-decoration:none;">rusticagentic.agency ↗</a>
 </footer>
 
 <script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
