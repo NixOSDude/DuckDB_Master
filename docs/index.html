@@ -172,7 +172,7 @@
     .service-card.featured-purple { border-color: var(--purple); background: #100a1a; }
     .service-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--text); }
     .service-card p { font-size: 0.88rem; color: var(--muted); flex: 1; }
-    .service-price {
+    .service-varies {
       display: inline-block;
       font-size: 0.82rem;
       font-weight: 700;
@@ -183,7 +183,7 @@
       padding: 0.25rem 0.6rem;
       margin-top: 0.3rem;
     }
-    .service-price.purple {
+    .service-varies.purple {
       color: var(--purple);
       background: #150a2a;
       border-color: #2a1545;
@@ -487,56 +487,56 @@
       <span class="service-tag tag-gold">Most Popular</span>
       <h3>Spark / Databricks → DuckDB Migration</h3>
       <p>Paying $5k–$20k/mo for a cluster that runs 5 dashboards? I audit your Databricks or Spark workload, identify what can be migrated, and rebuild it in DuckDB. Typical result: 80% cost reduction, 10–25x faster queries, no cluster to manage.</p>
-      <span class="service-price">$3,500 – $7,500 flat</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card featured-purple">
       <span class="service-tag tag-purple">Unique Capability</span>
       <h3>Post-Quantum Secured Pipeline</h3>
       <p>Three capabilities no other fractional engineer offers: <strong style="color:var(--text);">column-level encryption</strong> — sensitive fields encrypted individually in SQL, rest of the table fully queryable, only the keyholder reads the plaintext; <strong style="color:var(--text);">signed data deliveries</strong> — every report cryptographically authenticated so you can prove it came from me unmodified; <strong style="color:var(--text);">quantum-resistant standards</strong> — ML-KEM-768 + AES-256-GCM, NIST-finalized 2024, safe when quantum computers arrive. Ideal for proprietary data, IP-sensitive pipelines, and clients who need chain of custody.</p>
-      <span class="service-price purple">$5,000 – $12,000 flat</span>
+      <span class="service-varies purple">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card">
       <span class="service-tag tag-green">Fast ROI</span>
       <h3>Cloud Cost Audit + Migration Plan</h3>
       <p>I review your current Databricks, Snowflake, or Redshift bill line by line. I deliver a written report: what you're actually using, what you're wasting, and the exact migration path to reduce it by 60–80%. No commitment to migrate required.</p>
-      <span class="service-price">$750 flat</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card">
       <span class="service-tag tag-gold">Retainer</span>
       <h3>Fractional Data Team</h3>
       <p>Ongoing data engineering on retainer. I manage your pipelines, maintain your dashboards, and deliver automated reports. You get a senior data engineer without the $150k/yr salary. Minimum 3-month engagement.</p>
-      <span class="service-price">$1,500 – $4,500 / month</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card">
       <span class="service-tag tag-blue">One-Time</span>
       <h3>Data Swamp Rescue</h3>
       <p>Got a massive crashing spreadsheet, a 10-hour ETL job that keeps failing, or a pile of CSV exports nobody can query? Send me the problem. I port it to DuckDB, clean it, and return working results — usually within 48 hours.</p>
-      <span class="service-price">$500 – $2,500 flat</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card">
       <span class="service-tag tag-blue">One-Time</span>
       <h3>Custom Dashboard Build</h3>
       <p>I build an automated pipeline from your raw business data into a live, interactive Streamlit dashboard. Tailored to your KPIs. No more manual copy-pasting into spreadsheets. Delivered and documented.</p>
-      <span class="service-price">$1,500 – $4,000 flat</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card">
       <span class="service-tag tag-green">One-Time</span>
       <h3>Bare-Metal Analytics Setup</h3>
       <p>For companies ready to move off cloud. I spec, configure, and benchmark an optimized DuckDB stack on dedicated hardware (your server or Hetzner dedicated). NVMe-optimized, production-tuned, documented. You own the hardware, I own the setup.</p>
-      <span class="service-price">$2,500 – $5,000 flat</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card">
       <span class="service-tag tag-purple">Advisory</span>
       <h3>Data Architecture Review</h3>
       <p>Half-day or full-day deep-dive into your current data stack. I review your pipelines, query patterns, costs, and bottlenecks. You receive a written report with prioritized recommendations and a roadmap. No work contracted — just clarity.</p>
-      <span class="service-price">$1,500 – $3,000 flat</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
   </div>
@@ -604,7 +604,7 @@
       <h3>Online Stores &amp; Product Businesses</h3>
       <p>Orders, inventory, returns, ad spend, customer LTV — all of it sitting in Shopify exports and spreadsheets nobody queries. I build a DuckDB pipeline that pulls your data nightly and surfaces the numbers that actually drive decisions: which products make money, which channels convert, where inventory is bleeding margin.</p>
       <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Live Streamlit dashboard. Automatic nightly updates. No manual reporting.</p>
-      <span class="service-price purple">$2,500–$6,000 flat</span>
+      <span class="service-varies purple">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card featured-purple">
@@ -612,7 +612,7 @@
       <h3>Manufacturing, Distribution &amp; Field Services</h3>
       <p>Production logs, fulfillment data, service tickets, route records — operations-heavy businesses generate enormous amounts of data that never gets analyzed because nobody has the time or tools. I build the pipeline that turns your operational data into a live dashboard: throughput, cost variance, fulfillment rates, crew utilization.</p>
       <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Works from your existing exports. No new software required on your side.</p>
-      <span class="service-price">$3,500–$7,500 flat</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card">
@@ -620,7 +620,7 @@
       <h3>Consulting Firms &amp; MSPs</h3>
       <p>Utilization rates, project profitability, client billing — professional services firms track everything in spreadsheets and feel the pain every time a partner asks "are we making money on this account?" I build the pipeline that answers that question automatically, every week, without anyone touching a spreadsheet.</p>
       <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Works from your existing time-tracking and invoicing exports.</p>
-      <span class="service-price">$2,500–$5,000 flat</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card">
@@ -628,21 +628,21 @@
       <h3>Growth-Stage Software Companies</h3>
       <p>MRR, churn, cohort retention, product usage — the metrics that determine whether your business is growing or leaking. Most early-stage SaaS companies are guessing at these numbers from a Stripe export and a spreadsheet. I build the pipeline that surfaces them accurately, automatically, every morning.</p>
       <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Pulls from Stripe, your product DB, your CRM. Dashboard live in under a week.</p>
-      <span class="service-price">$2,500–$6,000 flat</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card">
       <span class="service-tag tag-blue">Series A / B Startups</span>
       <h3>Cash-Burn Companies</h3>
       <p>If your Databricks or Snowflake bill exceeds $5k/month and your queries touch under a billion rows, you are almost certainly overpaying by 5–10x. We migrate your workload to DuckDB. Typical result: 80% cost reduction, 25x faster queries, no cluster to manage. Migration pays for itself in the first month.</p>
-      <span class="service-price">$3,500–$7,500 flat migration</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
     <div class="service-card">
       <span class="service-tag tag-green">Staffing &amp; Recruiting</span>
       <h3>Staffing Firms &amp; Recruiting Operations</h3>
       <p>Placement records, timesheet exports, client billing data, ATS exports — staffing companies generate enormous operational data that lives in spreadsheets and never gets analyzed. I build the pipeline that answers the questions that drive your margins: fill rate by client, gross margin per placement, time-to-fill by role, utilization by recruiter. Runs automatically. No manual work.</p>
-      <span class="service-price">$2,500–$5,000 flat</span>
+      <span class="service-varies">Price varies per project — email for proposal</span>
     </div>
 
   </div>
@@ -736,10 +736,29 @@
 <section id="contact">
   <div class="contact-box">
     <div class="section-label" style="text-align:center;">// LET'S TALK</div>
-    <h2>Free 30-minute data audit.</h2>
-    <p>Tell me what your data stack looks like and what it costs.<br />
-       I'll tell you honestly whether I can cut that bill and how fast.<br />
-       No obligation. I respond within 24 hours.</p>
+    <h2>Send me an email. I'll send you a proposal.</h2>
+    <p style="max-width:640px;margin:0 auto 1.5rem;">
+      To save us both time, include the following when you write:
+    </p>
+    <div style="text-align:left;max-width:560px;margin:0 auto 2rem;display:flex;flex-direction:column;gap:0.75rem;">
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1rem 1.2rem;">
+        <span style="color:var(--duck);font-weight:700;">1. What data do you have?</span>
+        <p style="color:var(--muted);font-size:0.88rem;margin-top:0.3rem;">Spreadsheets, CSV exports, a CRM, a database, Shopify — whatever it is, name it. Don't worry if it's messy. That's the point.</p>
+      </div>
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1rem 1.2rem;">
+        <span style="color:var(--duck);font-weight:700;">2. What question are you trying to answer?</span>
+        <p style="color:var(--muted);font-size:0.88rem;margin-top:0.3rem;">Even if it's vague — "I want to know which clients make us money" or "I have no idea what's in these files" is a fine starting point.</p>
+      </div>
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1rem 1.2rem;">
+        <span style="color:var(--duck);font-weight:700;">3. What are you currently spending on data tools, if anything?</span>
+        <p style="color:var(--muted);font-size:0.88rem;margin-top:0.3rem;">Databricks, Snowflake, Power BI, Tableau, nothing — whatever it is. Zero is a perfectly valid answer.</p>
+      </div>
+      <div style="background:#161b22;border:1px solid #30363d;border-radius:8px;padding:1rem 1.2rem;">
+        <span style="color:var(--duck);font-weight:700;">4. What does your team look like today?</span>
+        <p style="color:var(--muted);font-size:0.88rem;margin-top:0.3rem;">How many people, what roles — and specifically, does anyone currently own data or reporting?</p>
+      </div>
+    </div>
+    <p style="color:var(--muted);font-size:0.9rem;margin-bottom:1.2rem;">I respond within 24 hours with a scoped proposal or follow-up questions. No sales call required to get a number.</p>
     <a href="mailto:scottbaker@rusticagentic.agency" class="contact-email">
       scottbaker@rusticagentic.agency
     </a>
