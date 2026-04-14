@@ -342,11 +342,11 @@
     </div>
     <div class="target-col">
       <h3 class="target-title" style="color: var(--green);">3. Digital Agencies & E-Commerce</h3>
-      <p style="font-size: 0.9rem; color: var(--text);">You sell results but the backend data is a mess. I process client data behind the scenes, deliver fully white-labeled dashboards you can resell. Clickstreams, ad data, transaction data — all of it.</p>
+      <p style="font-size: 0.9rem; color: var(--text);">You have client data scattered across ad platforms, CRMs, and spreadsheets with no clean way to query it. I build the pipeline that pulls it all together — clickstreams, ad spend, transaction data — into a single live Streamlit dashboard your team can actually use.</p>
     </div>
     <div class="target-col">
-      <h3 class="target-title" style="color: var(--purple);">4. Defense, Legal & Finance</h3>
-      <p style="font-size: 0.9rem; color: var(--text);">ITAR-sensitive, attorney-client privileged, or under SEC/FINRA scrutiny? I process and analyze your data with post-quantum column encryption built directly into the SQL pipeline — your data never leaves your infrastructure, every deliverable is cryptographically signed.</p>
+      <h3 class="target-title" style="color: var(--purple);">4. Document Swamps & Data Chaos</h3>
+      <p style="font-size: 0.9rem; color: var(--text);">Folders full of CSVs nobody queries. CRM exports that never get analyzed. Spreadsheets built by someone who left two years ago. I inventory what you have, tell you what it can answer, and build the pipeline that turns the chaos into clean, queryable data.</p>
     </div>
   </div>
 </div>
@@ -383,19 +383,32 @@
   ├── Parquet/CSV exports — clean, organized, ready to use
   └── 80% lower infrastructure costs starting month one</div>
 
-  <div class="sovereign-delivery">
-    <div class="sdl-col">
-      <div class="sdl-title">Your raw data never leaves your infrastructure.</div>
-      <div class="sdl-body">I operate with read-only credentials scoped to exactly the data I need. For cloud storage (S3/Azure/GCP), DuckDB streams directly without downloading. For on-prem, I mount read-only over SSH. Zero permanent copies on my end.</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem;margin-top:1.5rem;">
+
+    <div style="background:#0a0d12;border:1px solid var(--duck);border-radius:10px;padding:1.5rem;">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;color:var(--duck);font-weight:700;margin-bottom:0.5rem;">Stage 1 — Audit</div>
+      <div style="font-weight:700;color:var(--text);margin-bottom:0.5rem;">What data do you have and what can it answer?</div>
+      <div style="font-size:0.88rem;color:var(--muted);">I inventory every data source you have — CSVs, CRM exports, spreadsheets, databases. I deliver a written roadmap: exactly what questions your data can answer right now, and what to build first. Delivered in 48 hours. $750 flat.</div>
     </div>
-    <div class="sdl-col">
-      <div class="sdl-title">Works with your existing infrastructure.</div>
-      <div class="sdl-body">No new SaaS subscriptions. No data platform migrations required before we start. I connect to where your data already lives — S3, Azure Blob, GCS, on-prem — and return only results. Clean scope, fast start.</div>
+
+    <div style="background:#0a0d12;border:1px solid var(--blue);border-radius:10px;padding:1.5rem;">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;color:var(--blue);font-weight:700;margin-bottom:0.5rem;">Stage 2 — Build</div>
+      <div style="font-weight:700;color:var(--text);margin-bottom:0.5rem;">Raw data becomes a clean, queryable pipeline.</div>
+      <div style="font-size:0.88rem;color:var(--muted);">I build the DuckDB pipeline on your data. Typed correctly, cleaned, joined across sources. A live Streamlit dashboard surfaces your KPIs — interactive charts, updated automatically. You go from spreadsheet chaos to answers in days.</div>
     </div>
-    <div class="sdl-col">
-      <div class="sdl-title">Post-quantum security available.</div>
-      <div class="sdl-body">For sensitive columns, I can apply ML-KEM-768 + AES-256-GCM encryption directly in SQL. Encrypted at rest before it touches any pipeline. Only the keyholder decrypts. Future-proof against quantum attacks.</div>
+
+    <div style="background:#0a0d12;border:1px solid var(--green);border-radius:10px;padding:1.5rem;">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;color:var(--green);font-weight:700;margin-bottom:0.5rem;">Stage 3 — Automate</div>
+      <div style="font-weight:700;color:var(--text);margin-bottom:0.5rem;">Reports run themselves. Dashboards stay current.</div>
+      <div style="font-size:0.88rem;color:var(--muted);">The pipeline runs nightly without supervision. Reports email themselves to your team every Monday morning. Your dashboard is always up to date. Nobody manually pulls numbers ever again.</div>
     </div>
+
+    <div style="background:#0a0d12;border:1px solid var(--purple);border-radius:10px;padding:1.5rem;">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:2px;color:var(--purple);font-weight:700;margin-bottom:0.5rem;">Stage 4 — Secure</div>
+      <div style="font-weight:700;color:var(--text);margin-bottom:0.5rem;">Post-quantum encryption. Signed deliverables.</div>
+      <div style="font-size:0.88rem;color:var(--muted);">For sensitive business data: ML-KEM-768 column encryption directly in SQL — only the keyholder decrypts. Every report and dataset I deliver is post-quantum signed (ML-DSA-65, NIST FIPS 204). Cryptographic chain of custody on every output.</div>
+    </div>
+
   </div>
 
 </section>
@@ -453,7 +466,7 @@
       Safe to share, distribute, and archive — the public key cannot be used to forge signatures.
     </p>
     <p style="font-size:0.82rem;color:var(--muted);margin-bottom:16px;">
-      Verification is independent — opposing counsel, auditors, or your own team can confirm authenticity without contacting me.
+      Verification is independent — your own team or any third party can confirm authenticity without contacting me.
     </p>
     <div style="display:flex;gap:12px;flex-wrap:wrap;">
       <a href="scottbaker-mldsa65.pub.pem" download style="font-size:0.85rem;color:var(--purple);border:1px solid #30363d;padding:7px 16px;border-radius:4px;text-decoration:none;background:#0d1117;font-weight:600;">↓ Public Key (.pem)</a>
@@ -587,35 +600,35 @@
   <div class="services-grid">
 
     <div class="service-card featured-purple">
-      <span class="service-tag tag-purple">Legal Tech</span>
-      <h3>Law Firms &amp; Legal Ops</h3>
-      <p>Billing data, matter management exports, time-entry CSVs — law firms generate enormous analytical workloads that don't need a cluster. I build DuckDB pipelines that process your billing, utilization, and matter data in milliseconds. Post-quantum signed deliverables mean every report is cryptographically provable for audits and court proceedings.</p>
-      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Data never leaves your infrastructure. Signed audit log on every deliverable.</p>
-      <span class="service-price purple">$3,500–$7,500 flat</span>
+      <span class="service-tag tag-purple">E-Commerce &amp; Retail</span>
+      <h3>Online Stores &amp; Product Businesses</h3>
+      <p>Orders, inventory, returns, ad spend, customer LTV — all of it sitting in Shopify exports and spreadsheets nobody queries. I build a DuckDB pipeline that pulls your data nightly and surfaces the numbers that actually drive decisions: which products make money, which channels convert, where inventory is bleeding margin.</p>
+      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Live Streamlit dashboard. Automatic nightly updates. No manual reporting.</p>
+      <span class="service-price purple">$2,500–$6,000 flat</span>
     </div>
 
     <div class="service-card featured-purple">
-      <span class="service-tag tag-red" style="background:#2d1a1a;color:var(--red);border-color:var(--red)">ITAR / Defense</span>
-      <h3>Government Contractors</h3>
-      <p>Contract spend analysis, subcontractor data, program cost tracking — all of it sensitive, none of it suited for a shared cloud cluster. I build DuckDB pipelines on your infrastructure with ML-KEM-768 column encryption and ML-DSA-65 signed outputs (NIST FIPS 204) on every deliverable. Zero data egress. Cryptographic chain of custody.</p>
-      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Every deliverable signed. Every query auditable. Runs on your hardware or a dedicated GCP instance in your account.</p>
-      <span class="service-price" style="color:var(--red)">$5,000–$12,000 flat</span>
-    </div>
-
-    <div class="service-card">
-      <span class="service-tag tag-green">Healthcare</span>
-      <h3>Clinical &amp; Health Analytics</h3>
-      <p>Claims data, EHR exports, utilization reports — DuckDB processes your clinical datasets 10x faster than Databricks at a fraction of the cost. PHI stays in your infrastructure with ML-KEM-768 column encryption. Every analytical deliverable is ML-DSA-65 signed for HIPAA audit trail requirements.</p>
-      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Zero PHI egress. Post-quantum encrypted columns. Signed audit log on every output.</p>
+      <span class="service-tag tag-green">Operations &amp; Logistics</span>
+      <h3>Manufacturing, Distribution &amp; Field Services</h3>
+      <p>Production logs, fulfillment data, service tickets, route records — operations-heavy businesses generate enormous amounts of data that never gets analyzed because nobody has the time or tools. I build the pipeline that turns your operational data into a live dashboard: throughput, cost variance, fulfillment rates, crew utilization.</p>
+      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Works from your existing exports. No new software required on your side.</p>
       <span class="service-price">$3,500–$7,500 flat</span>
     </div>
 
     <div class="service-card">
-      <span class="service-tag tag-gold">Finance &amp; Accounting</span>
-      <h3>Tax Firms &amp; Financial Services</h3>
-      <p>Transaction data, GL exports, reconciliation workloads — DuckDB processes financial datasets at 172M rows/sec on a single node. I build automated pipelines that replace overnight batch jobs with sub-second queries. Every deliverable is ML-DSA-65 signed — defensible in an audit or regulatory proceeding.</p>
-      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Client financial data stays on your infrastructure. No SaaS subscription. No per-user fees.</p>
-      <span class="service-price">$3,500–$7,500 flat</span>
+      <span class="service-tag tag-blue">Professional Services</span>
+      <h3>Consulting Firms, Agencies &amp; MSPs</h3>
+      <p>Utilization rates, project profitability, client billing — professional services firms track everything in spreadsheets and feel the pain every time a partner asks "are we making money on this account?" I build the pipeline that answers that question automatically, every week, without anyone touching a spreadsheet.</p>
+      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Works from your existing time-tracking and invoicing exports.</p>
+      <span class="service-price">$2,500–$5,000 flat</span>
+    </div>
+
+    <div class="service-card">
+      <span class="service-tag tag-gold">SaaS &amp; Subscriptions</span>
+      <h3>Growth-Stage Software Companies</h3>
+      <p>MRR, churn, cohort retention, product usage — the metrics that determine whether your business is growing or leaking. Most early-stage SaaS companies are guessing at these numbers from a Stripe export and a spreadsheet. I build the pipeline that surfaces them accurately, automatically, every morning.</p>
+      <p style="margin-top:0.8rem;font-size:0.85rem;color:var(--muted)">Pulls from Stripe, your product DB, your CRM. Dashboard live in under a week.</p>
+      <span class="service-price">$2,500–$6,000 flat</span>
     </div>
 
     <div class="service-card">
@@ -628,7 +641,7 @@
     <div class="service-card">
       <span class="service-tag tag-green">Agencies</span>
       <h3>Digital Marketing Agencies</h3>
-      <p>You're paying $2k–$5k/mo for Supermetrics or Funnel.io to power dashboards you resell to clients. We build you a white-labeled DuckDB + Streamlit stack you own forever. Resell it to clients at whatever margin you want. No subscription. No per-seat fees.</p>
+      <p>You're paying $2k–$5k/mo for Supermetrics or Funnel.io and still manually assembling reports. I build a DuckDB + Streamlit pipeline from your ad platforms, CRM, and analytics data — one dashboard your team can read live. No subscription. No manual exports. You own it.</p>
       <span class="service-price">$2,500–$5,000 flat · you own it</span>
     </div>
 
@@ -704,7 +717,7 @@
     <div class="target-box" style="background: transparent; border: none; padding: 0; margin: 0;">
       <div class="target-col">
         <h3 style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Security & Architecture Veteran</h3>
-        <p style="font-size: 0.9rem; color: var(--muted);">Former Security Engineer with deep experience building systems for enterprise compliance environments. Your data is handled with operational precision — read-only access, zero permanent copies, transparent scope.</p>
+        <p style="font-size: 0.9rem; color: var(--muted);">Former Security Engineer with deep experience building data systems for enterprise environments. Your data is handled with operational precision — read-only access, zero permanent copies, transparent scope.</p>
       </div>
       <div class="target-col">
         <h3 style="color: var(--text); font-size: 1.1rem; margin-bottom: 0.5rem;">Certified Across the Stack</h3>
